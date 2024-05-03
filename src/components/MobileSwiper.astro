@@ -30,7 +30,7 @@ import Moment from 'moment';
                     <div class="swiper-slide">
                         <a href={`projects/${project.slug.current}`}>
                             <picture>
-                                <source media="(min-width:431px)" srcset="/images/sample-image-desktop-slider.webp">
+                                <source media="(min-width:430px)" srcset="/images/sample-image-desktop-slider.webp">
                                 <img src={urlFor(project.mobileImage).url()} alt={project.mobileImage.alt}>
                             </picture>
                         </a>
@@ -52,7 +52,7 @@ import Moment from 'moment';
         width: 100%;
         height: 100%;
 
-        @media (width >431px) {
+        @media (width >430px) {
             display: none;
         }
 
@@ -83,7 +83,7 @@ import Moment from 'moment';
                     grid-template-rows: auto auto;
                     gap: 6%;
 
-                    @media (width > 431px) {
+                    @media (width > 430px) {
                         display: none;
                     }
                     
