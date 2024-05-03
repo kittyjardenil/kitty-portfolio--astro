@@ -1,0 +1,66 @@
+---
+//styles
+import '../styles/global.css';
+import '../styles/typography.css';
+
+//components
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import DesktopNav from '../components/DesktopNav.astro';
+---
+
+<Layout bleedMarksColor='white' title='About' backgroundColor='purple'>
+    <div class="nav-wrapper">
+        <section class="box">
+            <Nav color='white' />
+            <DesktopNav color='white' activePage='etcetera'/>
+        </section>
+    </div>
+    <div class="h1-box"><h1>Coming Soon</h1></div>
+</Layout>
+
+<style>
+    .nav-wrapper {
+        
+        >.box {
+            padding: 24px;
+            position: absolute;
+            width: 100%;
+            box-sizing: border-box;
+
+            @media (width >431px) {
+                padding: 72px 64px;
+            }
+
+            @media (width > 1024px) {
+                padding: 64px;
+                height: 100svh;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+        }
+    }
+
+    .h1-box {
+        width: 100%;
+        height: 100svh;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        >h1 {
+            font-size: var(--h1);
+            color: white;
+            text-align: center;
+        }
+    }
+</style>
+
+<script>
+    if (window.innerWidth > 1024) {
+        document.body.style.overflow = 'hidden'
+    }
+</script>

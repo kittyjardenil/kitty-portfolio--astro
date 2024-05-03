@@ -1,0 +1,145 @@
+---
+//sanity
+import { sanityClient } from "sanity:client";
+const projects = await sanityClient.fetch(`*[_type == "project"] | order(date desc)`);
+
+//sanity imagebuilder
+import imageUrlBuilder from '@sanity/image-url'
+const builder = imageUrlBuilder(sanityClient)
+function urlFor(source) {
+  return builder.image(source)
+}
+
+//moment
+import Moment from 'moment';
+---
+
+<div class="swiper">
+    {
+        projects && <div class="swiper-wrapper">
+            {projects.map((project) => {
+                // Split category at '(' and insert <br> before it
+                const categoryParts = project.category.split('(');
+                const category = categoryParts.length > 1 ? (
+                    <>
+                        {categoryParts[0]}<br />({categoryParts.slice(1).join('(')}
+                    </>
+                ) : project.category;
+
+                return (
+                    <div class="swiper-slide">
+                        <a href={`projects/${project.slug.current}`}>
+                            <picture>
+                                <source media="(min-width:431px)" srcset="/images/sample-image-desktop-slider.webp">
+                                <img src={urlFor(project.mobileImage).url()} alt={project.mobileImage.alt}>
+                            </picture>
+                        </a>
+                        <a href={`projects/${project.slug.current}`} class="info">
+                            <p class="x-small--uppercase">{Moment(project.date).format('YYYY')}</p>
+                            <p class="x-small--uppercase--underline">{project.name}</p>
+                            <p class="x-small--uppercase">{category}</p>
+                            <p class="x-small--uppercase">{project.client}</p>
+                        </a>
+                    </div>
+                );
+            })}
+        </div>
+    }
+</div>
+
+<style>
+    .swiper {
+        width: 100%;
+        height: 100%;
+
+        @media (width >431px) {
+            display: none;
+        }
+
+        >.swiper-wrapper {
+            >.swiper-slide {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+
+                >a:nth-child(1) {
+                    display: flex;
+                    flex-grow: 1;
+                    
+                    >picture {
+                        display: flex;
+                        flex-grow: 1;
+    
+                        >img {
+                            flex-grow: 1;
+                            object-fit: cover;
+                        }
+                    }
+                }
+
+                >.info {
+                    display: grid;
+                    grid-template-columns: 8fr 12fr;
+                    grid-template-rows: auto auto;
+                    gap: 6%;
+
+                    @media (width > 431px) {
+                        display: none;
+                    }
+                    
+                    >p {
+                        font-size: var(--x-small);
+                    }
+                    
+                    >p:first-child {
+                        color: var(--gray);
+                        grid-column: 1/2;
+                        grid-row: 1/2;
+                    }
+
+                    > .x-small--uppercase--underline {
+                        color: var(--purple);
+                        grid-column: 1/2;
+                        grid-row: 2/3;
+                        height: fit-content;
+                    }
+                    
+                    >p:nth-child(3) {
+                        color: var(--gray);
+                        grid-column: 2/3;
+                        grid-row: 1/2;
+                    }
+                    
+                    >p:nth-child(4) {
+                        color: var(--purple);
+                        grid-column: 2/3;
+                        grid-row: 2/3;
+                        height: fit-content;
+                    }
+                }
+            }
+        }
+    }
+</style>
+
+<script>
+    import Swiper from 'swiper';
+    import { Autoplay } from 'swiper/modules'
+    import 'swiper/css';
+    import 'swiper/css/navigation';
+    import 'swiper/css/autoplay';
+
+    if (window.innerWidth < 430) {
+        const swiper = new Swiper('.swiper', {
+            modules: [Autoplay],
+            direction: 'horizontal',
+            loop: true,
+            speed: 500,
+            autoplay: {
+                delay: 6000,
+                pauseOnMouseEnter: true 
+            }
+        });
+    }
+
+</script>

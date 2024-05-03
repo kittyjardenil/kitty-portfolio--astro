@@ -1,0 +1,178 @@
+---
+interface Props {
+    color: "purple" | "white",
+    activePage: "home" | "book" | "archive" | "about" | "shop" | "etcetera" | "none",
+    addClass? : string
+}
+
+const {color, activePage, addClass} = Astro.props;
+---
+
+<nav data-color={color} id="desktopNav" class={addClass}>
+    <div class="box">
+        <div class="links">
+            <a href="/" class="row">
+                <div class="circle-box">
+                    <div class={`circle ${activePage === 'home' ? 'active' : ''}`} id="home"></div>
+                </div>
+                <div class="link">
+                    <p>Home</p>
+                </div>
+            </a>
+            <a href="/book-work" class="row">
+                <div class="circle-box">
+                    <div class={`circle ${activePage === 'book' ? 'active' : ''}`} ></div>
+                </div>
+                <div class="link">
+                    <p>Book Work</p>
+                </div>
+            </a>
+            <a href="/archive" class="row">
+                <div class="circle-box">
+                    <div class={`circle ${activePage === 'archive' ? 'active' : ''}`}></div>
+                </div>
+                <div class="link">
+                    <p>Archive</p>
+                </div>
+            </a>
+            <a href="/about" class="row">
+                <div class="circle-box">
+                    <div class={`circle ${activePage === 'about' ? 'active' : ''}`}></div>
+                </div>
+                <div class="link">
+                    <p>About</p>
+                </div>
+            </a>
+            <a href="/shop" class="row">
+                <div class="circle-box">
+                    <div class={`circle ${activePage === 'shop' ? 'active' : ''}`}></div>
+                </div>
+                <div class="link">
+                    <p>Shop</p>
+                </div>
+            </a>
+            <a href="/etcetera" class="row">
+                <div class="circle-box last">
+                    <div class={`circle ${activePage === 'etcetera' ? 'active' : ''}`}></div>
+                </div>
+                <div class={`link last ${color === 'purple' ? 'purple link-purple-border':'white link-white-border'}`}>
+                    <p>Etcetera</p>
+                </div>
+            </a>
+        </div>
+        <a href="https://www.instagram.com/kittyjardenil/" target="_blank">
+            <p class={`x-small--underline ${color === 'purple' ? 'purple':'white'}`}>↗ @kittyjardenil</p>
+        </a>
+    </div>
+</nav>
+
+<style>
+    nav {
+        --color: #6A37CC;
+        --backgroundImage: url('/icons/nav-background--purple.png');
+        --backgroundColor: #6A37CC; 
+
+        display: none;
+        z-index: 80;
+
+        @media ( width > 1024px) {
+            display: flex;
+        }
+
+        >.box {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 16px 24px 16px 16px;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-image: var(--backgroundImage);
+    
+            >.links {
+                display: flex;
+                flex-direction: column;
+
+                >.row {
+                    display: flex;
+
+                    &:hover .circle-box .circle {
+                        opacity: 1;
+                    }
+
+                    &:hover .link p {
+                        transform: translateX(4px);
+                    }
+
+                    >.circle-box {
+                        display: flex;
+                        padding: 0px 8px;
+                        align-items: center;
+                        border-bottom: 1px solid var(--color);
+                        border-right: 1px solid var(--color);
+
+                        &.last {
+                            border-bottom: 0px;
+                        }
+                    
+                        >.circle {
+                            width: 9px;
+                            height: 9px;
+                            transition: var(--transition);
+                            border-radius: 20px;
+                            opacity: 0;
+                            background-color: var(--backgroundColor);
+                        }
+                    }
+
+                    >.link {
+                        display: flex;
+                        width: 100%;
+                        padding: 6px 9px;
+                        font-size: 0.875rem;
+                        align-items: center;
+                        color: var(--color);
+                        border-bottom: 1px solid var(--color);
+
+                        &.last {
+                            border-bottom: 0px;
+                        }
+
+                        >p {
+                            transition: var(--transition);
+                        }
+                    }
+
+                }
+            }
+
+            >a {
+                display: flex;
+
+                >p {
+                    font-size: var(--x-small);
+                    color: var(--color);
+                    transition: var(--transition);
+
+                    &:hover {
+                        transform: translate3d(4px, -2px, 0px);
+                    }
+                }
+            }
+        }
+    }
+
+    .active {
+        opacity: 1 !important;
+    }
+</style>
+
+<script>
+    const nav = document.getElementById('desktopNav');
+    const color = nav.dataset.color;
+
+    if (color === "purple") {
+        nav.style.cssText = '--color: #6A37CC; --backgroundImage: url("/icons/nav-background--purple.png"); --backgroundColor: #6A37CC'
+    } else {
+        nav.style.cssText = '--color: white; --backgroundImage: url("/icons/nav-background--white.png"); --backgroundColor: white'
+    }
+</script>

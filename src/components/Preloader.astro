@@ -1,0 +1,68 @@
+---
+//styles
+import '../styles/global.css';
+import '../styles/typography.css';
+
+interface Props {
+    backgroundColor: "purple" | "white" | "black"
+}
+
+const {backgroundColor} = Astro.props
+---
+
+<div id="preloader" class:list={["visible", backgroundColor]}>
+</div>
+
+<style>
+    div {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+    }
+
+    .purple {
+        background-color: var(--purple);
+    }
+
+    .white {
+        background-color: white;
+    }
+
+    .black {
+        background-color: var(--black);
+    }
+
+    .visible {
+        opacity: 1;
+        transition: var(--transition);
+    }
+
+    .hidden {
+        opacity: 0;
+        transition: var(--transition);
+    }
+</style>
+
+<script>
+    // Hide the preloader once the page has finished loading
+    window.addEventListener('load', function(){
+        const preloader = document.getElementById('preloader');
+        
+        if (preloader.classList.contains("visible")) {
+            preloader.classList.remove("visible");
+            preloader.classList.add("hidden");
+        }
+
+        else {
+            preloader.classList.remove("hidden");
+            preloader.classList.add("visible");
+        }
+
+        setTimeout(function() {
+            preloader.style.display = 'none';
+        }, 200);
+    });
+</script>

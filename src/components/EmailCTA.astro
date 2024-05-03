@@ -1,0 +1,35 @@
+---
+//styles
+import '../styles/global.css';
+
+//props
+interface Props {
+    color: "purple" | "white"
+    addClass? : string
+}
+
+const {color, addClass} = Astro.props
+---
+<a href="mailto:jardenilkitty@gmail.com" class={"cta " + addClass}>
+    <img src={"/icons/cta--" + color + ".svg"} alt="email icon">
+</a>
+
+<style>
+    .cta {
+		display: none;
+		z-index: 21;
+        position: fixed;
+
+		@media (width > 1024px) {
+			display: block;
+			width: 80px;
+			right: 64px;
+			top: 64px;
+			transition: var(--transition);
+
+			&:hover {
+				transform: translate3d(-4px, -8px, 0px) rotate(-20deg) scale(1.2);
+			}
+		}
+			
+</style>

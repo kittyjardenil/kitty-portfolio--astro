@@ -1,0 +1,127 @@
+---
+//props
+interface Props {
+	title: string;
+	bleedMarksColor: "purple" | "white"
+	backgroundColor: "purple" | "white" | "black"
+}
+
+const { title, bleedMarksColor, backgroundColor} = Astro.props;
+
+//astro-seo
+import { SEO } from "astro-seo";
+
+//components
+import BleedMarks from "../components/BleedMarks.astro";
+import Preloader from "../components/Preloader.astro";
+import MobileNav from "../components/MobileNav.astro";
+
+//styles
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{"Kitty Jardenil | " + title}</title>
+		<SEO
+			title={"Kitty Jardenil | " + title}
+			description="Kitty Jardenil is a designer, illustrator, and letterer based in Parañaque, Philippines. She is currently a full time designer at NS Design but open for freelance work."
+			openGraph={{
+				basic: {
+				title: title,
+				type: "Portfolio",
+				image: "",
+				}
+			}}
+			twitter={{
+				creator: "@kittyjardenil"
+			}}
+    	/>
+		<script
+		src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous" defer></script>
+		<script
+		src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+		integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+		crossorigin="anonymous" defer></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" integrity="sha512-0bEtK0USNd96MnO4XhH8jhv3nyRF0eK87pJke6pkYf3cM0uDIhNJy9ltuzqgypoIFXw3JSuiy04tVk4AjpZdZw==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+		<script>
+			// @ts-nocheck
+			$( function() {
+				$( ".draggable" ).draggable({
+					containment: "html",
+					start: function(event, ui) {
+						$(this).css('right', 'unset');
+        			}
+				});
+			});
+		</script>
+	</head>
+	<body class={backgroundColor}>
+		<Preloader backgroundColor={backgroundColor}/>
+		<BleedMarks color={bleedMarksColor}/>
+		<MobileNav backgroundColor={backgroundColor} activePage={title}/>
+		<slot />
+	</body>
+</html>
+
+<style>
+	.purple {
+		background-color: var(--purple);
+	}
+
+	.white {
+		background-color: white;
+	}
+
+	.black {
+		background-color: var(--black);
+	}
+</style>
+
+<script>
+	const closeMobileNavIcon = document.getElementById('closeMobileNav')
+	const openMobileNavIcon = document.getElementById('openMobileNav')
+	const mobileNav = document.getElementById('mobileNav')
+	const mobileNavBackdrop = document.getElementById('mobileNavBackdrop')
+	const body = document.body;
+
+	openMobileNavIcon.addEventListener('click', function() {
+		mobileNav.style.display = 'block'
+		mobileNavBackdrop.style.display = 'block'
+		body.style.overflow = 'hidden'
+
+		setTimeout(function () {
+			mobileNav.style.transform = 'translateY(0px)'
+			mobileNav.style.opacity = '1'
+			mobileNavBackdrop.style.opacity = '1'
+		}, 1)
+	})
+
+	closeMobileNavIcon.addEventListener('click', function() {
+		closeMobileNav()
+	})
+
+	mobileNavBackdrop.addEventListener('click', function() {
+		closeMobileNav()
+	})
+	
+	function closeMobileNav() {
+		mobileNav.style.transform = 'translateY(-600px)'
+		mobileNav.style.opacity = '0'
+		mobileNavBackdrop.style.opacity = '0'
+		body.style.overflow = 'visible'
+
+		setTimeout(function () {
+			mobileNav.style.display = 'none'
+			mobileNavBackdrop.style.display = 'none'
+		}, 300)
+	}
+</script>

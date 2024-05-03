@@ -1,0 +1,384 @@
+---
+//styles
+import '../styles/global.css';
+import '../styles/typography.css';
+
+//components
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import DesktopNav from '../components/DesktopNav.astro';
+import EmailCTA from '../components/EmailCTA.astro';
+---
+
+<Layout bleedMarksColor='white' title='About' backgroundColor='purple'>
+    <div class="smiley draggable"><img src="/icons/smiley--white.svg" alt="Smiley Icon"></div>
+    <div class="peace draggable"><img src="/icons/peace--white.svg" alt="Peace Icon"></div>
+    <div class="star draggable"><img src="/icons/star-polygon--white.svg" alt="Star Icon"></div>
+    <EmailCTA color='white'/>
+    <main>
+        <section class="box">
+            <Nav color='white' addClass='nav--about' />
+            <DesktopNav color='white' activePage='about' addClass='desktopNav--about'/>
+            <div class="heading">
+                <h1>Kitty Jardenil is a designer, illustrator, and letterer from Parañaque, Philippines.</h1>
+                <span>Often inspired by vintage illustrations and ephemera, she likes to position her work between the digital space and printed matter. This is evident in her use of texture, type, and color.
+                <br><br>
+                Kitty has collaborated with clients like Netflix, Krispy Kreme, Levi’s, and Uniqlo. Her work has been featured online and in print.
+                <br><br>  
+                She is currently a designer at <a href="https://www.instagram.com/nsdesign.ph/" target="_blank"class="h5--underline">NS Design</a> but is open for freelance work.
+                </span>
+            </div>
+            <picture>
+                <source media="(min-width:431px)" srcset="/images/kitty-jardenil--desktop.webp">
+                <img src="/images/kitty-jardenil--mobile.webp" alt="Kitty Jardenil">
+            </picture>
+            <div class="info clients">
+                <h2>Selected Clients</h2>
+                <div class="columns">
+                    <div class="column">
+                        <p>Netflix</p>
+                        <p>UNIQLO</p>
+                        <p>Levi's</p>
+                        <p>Krispy Kreme</p>
+                        <p>CNN Life</p>
+                        <p>SM Woman</p>
+                        <p>Tatler Philippines</p>
+                        <p>Ayala Malls Pasyal</p>
+                        <p>Power Mac Center</p>
+                    </div>
+                    <div class="column">
+                        <p>ABS-CBN Books</p>
+                        <p>Woomera Wines</p>
+                        <p>Crosta Pizzeria</p>
+                        <p>Young STAR</p>
+                        <p>Adarna House</p>
+                    </div>
+                </div>
+            </div>
+            <div class="info features">
+                <h2>Features</h2>
+                <div class="column">
+                    <p>Young Star</p>
+                    <p>Candy Magazine</p>
+                    <p>Girls Club Asia</p>
+                    <p>Manila Bulletin</p>
+                </div>
+            </div>
+            <div class="info dream">
+                <h2>Dream Projects</h2>
+                <div class="column">
+                    <p>Book Covers</p>
+                    <p>Album Covers</p>
+                    <p>Merchandise for pop culture</p>
+                </div>
+            </div>
+            <div class="contact">
+                <a href="mailto:jardenilkitty@gmail.com" class="small--underline">↗ Email</a>
+                <a href="https://www.instagram.com/kittyjardenil/" target="_blank" class="small--underline">↗ Instagram</a>
+                <a href="https://www.twitter.com/kittyjardenil/" target="_blank" class="small--underline">↗ Twitter</a>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style is:global>
+    .nav--about {
+        @media  (width > 431px) {
+            grid-column: 1/13;
+            margin-bottom: 64px;
+        }
+        
+        @media  (width > 1024px) {
+            grid-column: 1/5;
+            margin-bottom: 48px;
+        }
+    }
+    .desktopNav--about {
+        @media  (width > 1024px) {
+            grid-row: 5/6;
+            grid-column: 1/5;
+            align-self: end;
+        }
+    }
+</style>
+
+<style>
+    .smiley {
+        top: 1070px;  
+        right: 57px;
+        width: 31px;
+
+        @media (width > 431px) {
+            right: 45px;
+            top: 671px;
+            width: 49px;
+        }
+        
+        @media (width > 1024px) {
+            left: 333px;
+            right: unset;
+            top: 495px;
+            width: 31px;
+        }
+    }
+    .peace {
+        top: 1209px;  
+        right: 95px;
+        width: 34px;
+
+        @media (width > 431px) {
+            top: 1627px;
+            right: 90px;
+            width: 52px;
+        }
+        
+        @media (width > 1024px) {
+            left: 705px;
+            right: unset;
+            top: 700px;
+            width: 34px;
+        }
+    }
+    .star {
+        top: 1345px;  
+        right: 31px;
+        width: 30px;
+
+        @media (width > 431px) {
+            right: 83px;
+            top: 894px;
+            width: 64px;
+        }
+        
+        @media (width > 1024px) {
+            right: 217px;
+            top: 230px;
+            width: 30px;
+        }
+    }
+    main {
+        >.box {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 24px;
+
+            @media (width > 431px) {
+                display: grid;
+                grid-template-columns: repeat(12,1fr);
+                padding: 72px 64px;
+                gap: 0px;
+            }
+
+            @media (width > 1024px) {
+                grid-template-columns: repeat(20, 1fr);
+                height: 100svh;
+                box-sizing: border-box;
+            }
+
+            >.heading {
+                display: flex;
+                flex-direction: column;
+                gap: 32px;
+                color: white;
+
+                @media (width >431px) {
+                    grid-column: 1/13;
+                    margin-bottom: 64px;
+                }
+                
+                @media (width >1024px) {
+                    grid-column: 1/6;
+                    margin-bottom: 0px;
+                    grid-row: 2/4;
+                }
+
+                >h1 {
+                    font-size: var(--h3);
+
+                    @media (width >431px) {
+                        font-size: var(--h1);
+                    }
+                    
+                    @media (width >1024px) {
+                        font-size: var(--h4);
+                    }
+                }
+
+                >span {
+                    font-size: var(--h5);
+                    font-family: Fern-Text;
+                    
+                    @media (width >431px) {
+                        font-size: var(--h3);
+                        line-height: 128%;
+                    }
+                    
+                    @media (width >1024px) {
+                        font-size: var(--h6);
+                        line-height: 128%;
+                        display: inline-block;
+                    }
+
+                    >a {
+                        color: white;
+                        transition: var(--transition);
+                        display: inline-block;
+
+                        &:hover {
+                            transform: translateY(-2px);
+                        }
+                    }1
+                }
+            }
+
+            >.info {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                color: white;
+
+                >h2 {
+                    font-size: var(--medium);
+                    font-family: Jet-Brains-Mono;
+
+                    @media (width >431px) {
+                        font-size: var(--x-large);
+                    }
+
+                    @media (width >1024px) {
+                        font-size: var(--medium);
+                    }
+                }
+
+                >.columns{
+                    font-size: var(--small);
+                    display: grid;
+                    grid-template-columns: 5fr 4fr;
+                    gap: 10%;
+                    
+                    @media (width >431px) {
+                        font-size: var(--medium);
+                    }
+                    
+                    @media (width >1024px) {
+                        font-size: var(--x-small);
+                        display: flex;
+                        flex-direction: row;
+                        gap: 32px;
+                    }
+
+                    >.column {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 2px;
+                    }
+                }
+
+                >.column {
+                    font-size: var(--small);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2px;
+
+                    @media (width >431px) {
+                        font-size: var(--medium);
+                    }
+                    
+                    @media (width >1024px) {
+                        font-size: var(--x-small);
+                    }
+                }
+            }
+
+            >picture {
+                @media (width >431px) {
+                    grid-column: 1/12;
+                    grid-row: 6;
+                    margin-top: 64px;
+                }
+                
+                @media (width >1024px) {
+                    grid-column: 14/18;
+                    grid-row: 3/6;
+                    margin-top: 0px;
+                }
+            }
+            
+            >.clients {
+                @media (width >431px) {
+                    grid-column: 1/6;
+                    grid-row: 3/5;
+                }
+                
+                @media (width >1024px) {
+                    grid-column: 8/12;
+                    grid-row: 2/3;
+                }
+            }
+
+            >.features {
+                @media (width >431px) {
+                    grid-column: 7/13;
+                    grid-row: 3/4;
+                }
+                
+                @media (width >1024px) {
+                    grid-column: 14;
+                    grid-row: 2/3;
+                }
+            }
+
+            >.dream {
+                @media (width >431px) {
+                    grid-column: 7/13;
+                    grid-row: 4;
+                }
+                
+                @media (width >1024px) {
+                    grid-column: 8/12;
+                    grid-row: 4;
+                }
+            }
+
+            >.contact {
+                display: flex;
+                flex-direction: column;
+                gap: 3px;
+                
+                @media (width >431px) {
+                    gap: 8px;
+                    grid-column: 11/13;
+                    grid-row: 6;
+                    align-self: end;
+                }
+
+                @media (width >1024px) {
+                    gap: 3px;
+                    grid-column: 8/11;
+                    grid-row: 5;
+                    align-self: end;
+                }
+
+                >a{
+                    font-family: Jet-Brains-Mono;
+                    font-size: var(--small);
+                    color: white;
+                    transition: var(--transition);
+                    
+                    &:hover {
+                        transform: translate3d(4px, -4px, 0px);
+                    }
+                    
+                    @media (width >431px) {
+                        font-size: var(--medium);
+                    }
+
+                    @media (width >1024px) {
+                        font-size: var(--small);
+                    }
+                }
+            }
+        }
+    }
+</style>

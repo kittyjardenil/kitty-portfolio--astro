@@ -1,0 +1,280 @@
+---
+//styles
+import '../styles/global.css';
+import '../styles/typography.css';
+
+//sanity
+import { sanityClient } from "sanity:client";
+const projects = await sanityClient.fetch(`*[_type == "project"] | order(date desc)`);
+
+//sanity imagebuilder
+import imageUrlBuilder from '@sanity/image-url'
+const builder = imageUrlBuilder(sanityClient)
+function urlFor(source) {
+  return builder.image(source)
+}
+
+//moment
+import Moment from 'moment';
+---
+<script>
+
+</script>
+
+{
+    projects && <div class="projects">
+        {projects.map((project, index) => (
+            <a href={`projects/${project.slug.current}`} class="project" data-project-index={index} data-project-name={project.name}>
+                <div class="star"><img src="/icons/star.svg" alt=""></div>
+                <p class="date small--uppercase">{Moment(project.date).format('YYYY')}</p>
+                <p class="name small--uppercase--underline">{project.name}</p>
+                <p class="client small--uppercase">{project.client}</p>
+                <p class="category small--uppercase">{project.category}</p>
+            </a>
+        ))}
+    </div>
+}
+
+<div class="swiper">
+    {
+        projects && <div class="swiper-wrapper">
+            {projects.map((project) => (
+                    <div class="swiper-slide">
+                        <a href={`projects/${project.slug.current}`} data-project-name={project.name} class="swiper-box">
+                            <img src={urlFor(project.desktopImage).url()} alt={project.desktopImage.alt} class="swiper-image">
+                            <div class="left"></div>
+                            <div class="right"></div>
+                        </a>
+                    </div>
+            ))}
+        </div>
+    }
+</div>
+
+<style>
+    .active {
+        color: var(--purple);
+        opacity: 1;
+    }
+    
+    .projects {
+        display: none;
+        margin-bottom: 48px;
+
+        @media (width >431px) {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        @media (width >1024px) {
+            gap: 6px;
+            width: 85%;
+        }
+
+        >.project {
+            display: grid;
+            grid-template-columns: 2fr 6fr 5fr 7fr;
+            position: relative;
+
+            @media (width > 1024px) {
+                grid-template-columns: 2fr 5fr 5fr 8fr;
+            }
+
+            &:hover .star {
+                opacity: 1 !important;
+            }
+
+            &:hover .date, &:hover .category {
+                color: var(--purple) !important;
+            }
+
+            >.star {
+                display: flex;
+                position: absolute;
+                left: -24px;
+                top: 3px;
+                opacity: 0;
+                transition: var(--transition);
+            }
+
+            >p {
+                font-size: var(--small);
+                transition: var(--transition);
+            }
+
+            >.date,.category {
+                color: var(--gray);
+            }
+
+            >.name,.client {
+                color: var(--purple);
+            }
+        }
+    }
+
+    .swiper {
+        display: none;
+
+        @media (width >431px) {
+            display: block;
+        }
+
+        @media (width > 1024px) {
+            width: 100%;
+        }
+
+        >.swiper-wrapper {
+            
+            >.swiper-slide {
+                @media (width > 1024px) {
+                    display: flex;
+                }
+                
+                >a {
+                    @media (width > 1024px) {
+                        flex-shrink: 0;
+                        width: 100%;
+                        display: flex;
+                    }
+                    
+                    >img {
+                        @media (width > 1024px) {
+                            width: 100%;
+                            object-fit: cover;
+                            object-position: center;
+                            flex-shrink: 1;
+                            transition: var(--transition);
+
+                            &:hover {
+                                cursor: url('/icons/arrow--right.svg'), auto;
+                            }
+                        }
+                    }
+
+                    >div {
+                        position: absolute;
+                        width: 50%;
+                        height: 100%;
+                    }
+
+                    .left {
+                        left: 0;
+                        
+                        &:hover {
+                            cursor: url('/icons/arrow--left.svg'), auto;
+                        }
+                    }
+
+                    .right {
+                        right: 0;
+                        
+                        &:hover {
+                            cursor: url('/icons/arrow--right.svg'), auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+</style>
+
+<script>
+    //@ts-nocheck
+
+    import Swiper from 'swiper';
+    import { Autoplay } from 'swiper/modules'
+    import 'swiper/css';
+    import 'swiper/css/autoplay';
+
+    const swiper = new Swiper('.swiper', {
+        modules: [Autoplay],
+        direction: 'horizontal',
+        loop: true,
+        speed: 500,
+        autoplay: {
+            delay: 6000,
+            pauseOnMouseEnter: true
+        },
+    });
+
+    if (window.innerWidth > 430 && window.innerWidth < 1024) {
+        swiper[1].on('slideChange', function () {
+            const activeSlide = this.slides[this.activeIndex];
+            const projectName = activeSlide.querySelector('.swiper-slide a').getAttribute('data-project-name');
+            const nameParagraphs = document.querySelectorAll('.name');
+            
+            nameParagraphs.forEach((paragraph) => {
+                if (paragraph.textContent === projectName) {
+                    paragraph.nextElementSibling.nextElementSibling.style.color = 'var(--purple)'
+                    paragraph.previousElementSibling.style.color = 'var(--purple)'
+                    paragraph.previousElementSibling.previousElementSibling.style.opacity = '1'
+                } else {
+                    paragraph.nextElementSibling.nextElementSibling.style.color = 'var(--gray)'
+                    paragraph.previousElementSibling.style.color = 'var(--gray)'
+                    paragraph.previousElementSibling.previousElementSibling.style.opacity = '0'
+                }
+            });
+        });
+    }
+
+    if (window.innerWidth > 1024) {
+        swiper[1].autoplay.stop()
+        const projectLinks = document.querySelectorAll('.project')
+        
+        projectLinks.forEach(projectLink => {
+            projectLink.addEventListener('mouseover', function() {
+                const projectName = projectLink.getAttribute('data-project-name')
+                const swiperSlides = document.getElementsByClassName('swiper-box')
+                let slideIndex;
+
+                for (let i = 0; i < swiperSlides.length; i++) {
+                    const slideProjectName = swiperSlides[i].getAttribute('data-project-name');
+                    if (slideProjectName === projectName) {
+                        slideIndex = i;
+                        break;
+                    }
+                }
+
+                swiper[1].slideTo(slideIndex, 500);    
+            })
+        });
+
+        swiper[1].on('slideChange', function () {
+            const activeSlide = swiper[1].slides[swiper[1].activeIndex];
+            const projectName = activeSlide.querySelector('.swiper-slide a').getAttribute('data-project-name')
+            console.log(projectName)
+            const nameParagraphs = document.querySelectorAll('.name');
+
+            nameParagraphs.forEach((paragraph) => {
+                if (paragraph.textContent === projectName) {
+                    paragraph.nextElementSibling.nextElementSibling.style.color = 'var(--purple)'
+                    paragraph.previousElementSibling.style.color = 'var(--purple)'
+                    paragraph.previousElementSibling.previousElementSibling.style.opacity = '1'
+                } else {
+                    paragraph.nextElementSibling.nextElementSibling.style.color = 'var(--gray)'
+                    paragraph.previousElementSibling.style.color = 'var(--gray)'
+                    paragraph.previousElementSibling.previousElementSibling.style.opacity = '0'
+                }
+            });
+        })
+    }
+
+    const leftImageRects = document.getElementsByClassName('left')
+    const rightImageRects = document.getElementsByClassName('right')
+
+    for (let index = 0; index < leftImageRects.length; index++) {
+        const leftImageRect = leftImageRects[index];
+        leftImageRect.addEventListener('click', function() {
+            swiper[1].slidePrev(300)
+        })
+    }
+
+    
+    for (let index = 0; index < rightImageRects.length; index++) {
+        const rightImageRect = rightImageRects[index];
+        rightImageRect.addEventListener('click', function() {
+            swiper[1].slideNext(300)
+        })
+    }
+</script>

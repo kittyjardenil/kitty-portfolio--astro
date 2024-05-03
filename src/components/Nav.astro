@@ -1,0 +1,62 @@
+---
+//components
+import Logo from "./Logo.astro"
+
+//props
+interface Props {
+    color: "purple" | "white";
+    addClass? : string
+}
+
+const {color, addClass} = Astro.props;
+---
+
+<nav class={addClass}>
+    <Logo color={color}/>
+    <div class="burger" id="openMobileNav">
+        <div class={color}></div>
+        <div class={color}></div>
+        <div class={color}></div>
+    </div>
+</nav>
+
+<style>
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        >.burger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            @media (width > 431px) {
+                gap: 11px;
+            }
+
+            
+            @media (width > 1024px) {
+                display: none;
+            }
+
+            > div {
+                width: 20px;
+                height: 2px;
+
+                @media (width > 431px) {
+                    height: 4.4px;
+                    width: 44px;
+                }
+            }
+
+            >.purple {
+                background-color: var(--purple);
+            }
+
+            >.white {
+                background-color: white;
+            }
+        }
+    }
+</style>

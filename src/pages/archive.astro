@@ -1,0 +1,426 @@
+---
+//components
+import Layout from "../layouts/Layout.astro"
+import Nav from "../components/Nav.astro"
+import DesktopNav from "../components/DesktopNav.astro";
+import EmailCTA from "../components/EmailCTA.astro";
+---
+
+<Layout backgroundColor="black" bleedMarksColor="white" title="Archive">
+    <section class="nav-box">
+        <Nav color="white"/>
+        <DesktopNav activePage="archive" color="white"/>
+    </section>
+    <EmailCTA color="white"/>
+    <section class="archive" id="archive">
+        <img src="/archive/rocks.webp" alt="" class="draggable rocks">
+        <img src="/archive/vinyl.webp" alt="" class="draggable vinyl">
+        <img src="/archive/bend.webp" alt="" class="draggable bend">
+        <img src="/archive/chef.webp" alt="" class="draggable chef">
+        <img src="/archive/rooster.webp" alt="" class="draggable rooster">
+        <img src="/archive/internet.webp" alt="" class="draggable internet">
+        <img src="/archive/a.webp" alt="" class="draggable a" id="a">
+        <img src="/archive/smart.webp" alt="" class="draggable smart">
+        <img src="/archive/collage.webp" alt="" class="draggable collage">
+        <img src="/archive/school.webp" alt="" class="draggable school" id="school">
+        <img src="/archive/kibo.webp" alt="" class="draggable kibo" id="kibo">
+        <img src="/archive/lavender.webp" alt="" class="draggable lavender">
+    </section>
+</Layout>
+
+<style>
+    .nav-box {
+        padding: 24px;
+
+        @media ( width > 431px) {
+            padding: 64px 72px;
+        }
+        
+        @media ( width > 1024px) {
+            padding: 64px;
+            height: 100svh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: absolute;
+        }
+    }
+
+    .archive {
+        position: relative;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 320px;
+
+        @media (width >431px) {
+            width: 768px;
+        }
+
+        @media (width > 1024px) {
+            width: 1024px;
+            height: 100svh;
+            position: relative;
+            top: 0;
+            height: 690px;
+            bottom: 0;
+            margin: auto;
+        }
+
+        
+        @media (width > 1400px) {
+        }
+    }
+
+    .rocks {
+        left: 16px;
+        width: 100px;
+        top: 53px;
+        z-index: 11;
+
+        @media (width >431px) {
+            width: 102px;
+            top: 200px;
+            left: 84px;
+        }
+
+        @media (width > 1024px) {
+            top: 260px;
+            left: 24px;
+        }
+
+        @media (width > 1400px) {
+            width: 120px;
+            left: -130px;
+            top: 200px;
+        }
+    }
+
+    .vinyl {
+        right: 24px;
+        top: 22px;
+        width: 240px;
+        z-index: 10;
+
+        @media (width >431px) {
+            width: 265px;
+            top: 60px;
+            left: 180px;
+        }
+
+        @media (width > 1024px) {
+            top: 100px;
+            left: 120px;
+        }
+
+        @media (width > 1400px) {
+            left: -20px;
+            width: 300px;
+            top: 40px;
+        }
+    }
+
+    .bend {
+        top: 320px;
+        left: 40px;
+        width: 99px;
+        z-index: 12;
+
+        @media (width >431px) {
+            width: 80px;
+            top: 420px;
+            left: 180px;
+        }
+
+        @media (width > 1024px) {
+            top: 20px;
+            left: unset;
+            right: 280px;
+            z-index: 19;
+        }
+
+        @media (width > 1400px) {
+            width: 100px;
+            right: 280px;
+        }
+    }
+    
+    .chef {
+        top: 350px;
+        right: 32px;
+        width: 180px;
+        z-index: 13;
+
+        @media (width >431px) {
+            width: 189px;
+            top: 0px;
+            right: 250px;
+            z-index: 21;
+        }
+
+        @media (width > 1024px) {
+            top: 20px;
+            left: 280px;
+        }
+
+        @media (width > 1400px) {
+            top: -20px;
+            left: 200px;
+            width: 210px;
+        }
+    }
+    
+    .rooster {
+        top: 480px;
+        left: 0;
+        right: 0;
+        width: 300px;
+        margin: 0 auto;
+        z-index: 14;
+
+        @media (width >431px) {
+            width: 279px;
+            top: 290px;
+            right: 64px;
+            margin: unset;
+            left: unset;
+        }
+
+        @media (width > 1024px) {
+            top: 280px;
+            left: 400px;
+            z-index: 13;
+        }
+
+        @media (width > 1400px) {
+            top: 350px;
+            width: 300px;
+        }
+    }
+    
+    .internet {
+        top: 900px;
+        right: 60px;
+        width: 120px;
+        transform: rotate(12deg);
+        z-index: 16;
+
+        @media (width >431px) {
+            width: 148px;
+            top: 420px;
+            right: 325px;
+            transform: rotate(0deg);
+        }
+
+        @media (width > 1024px) {
+            top: 150px;
+            left: 330px;
+            right: unset;
+            width:130px;
+        }
+
+        @media (width > 1400px) {
+            top: 290px;
+            left: 310px;
+            width: 150px;
+        }
+    }
+    
+    .a {
+        width: 210px;
+        top: 990px;
+        left: 50px;
+        z-index: 15;
+
+        @media (width >431px) {
+            width: 212px;
+            top: 560px;
+            left: 100px;
+        }
+
+        @media (width > 1024px) {
+            top: 480px;
+            left: 240px;
+            width: 190px;
+        }
+
+        @media (width > 1400px) {
+            width: 230px;
+            left: 130px;
+            top: 480px;
+        }
+    }
+    
+    .smart {
+        width: 136px;
+        top: 1150px;
+        right: 24px;
+        z-index: 17;
+
+        @media (width >431px) {
+            width: 100px;
+            top: 1020px;
+            right: 200px;
+        }
+
+        @media (width > 1024px) {
+            top: 420px;
+            right: 40px;
+            z-index: 18;
+        }
+
+        @media (width > 1400px) {
+            right: -150px;
+            width: 120px;
+        }
+    }
+    
+    .collage {
+        width: 223px;
+        top: 1300px;
+        left: 37px;
+        z-index: 18;
+
+        @media (width >431px) {
+            width: 287px;
+            top: 600px;
+            left: unset;
+            right: 140px;
+        }
+
+        @media (width > 1024px) {
+            top: 488px;
+            right: 40px;
+            z-index: 17;
+        }
+
+        @media (width > 1400px) {
+            right: -80px;
+            width: 350px;
+        }
+    }
+    
+    .school {
+        width: 250px;
+        top: 1480px;
+        right: 35px;
+        z-index: 19;
+
+        @media (width >431px) {
+            width: 306px;
+            top: 830px;
+            left: 120px;
+            right: unset;
+        }
+
+        @media (width > 1024px) {
+            top: 100px;
+            left: unset;
+            right: 24px;
+            z-index: 12;
+        }
+
+        @media (width > 1400px) {
+            width: 350px;
+            right: -100px;
+            top: 70px;
+        }
+    }
+    
+    .kibo {
+        width: 130px;
+        top: 1750px;
+        left: 40px;
+        z-index: 21;
+
+        @media (width >431px) {
+            width: 164px;
+            top: 16px;
+            left: unset;
+            right: 72px;
+            z-index: 13;
+        }
+
+        @media (width > 1024px) {
+            top: 0px;
+            left: 480px;
+            z-index: 20;
+        }
+
+        @media (width > 1400px) {
+            width: 180px;
+            left: 440px;
+        }
+    }
+    
+    .lavender {
+        width: 175px;
+        top: 1770px;
+        right: 20px;
+        z-index: 20;
+
+        @media (width >431px) {
+            width: 247px;
+            top: 790px;
+            right: 100px;
+        }
+
+        @media (width > 1024px) {
+            width: 200px;
+            top: 284px;
+            left: unset;
+            right: 250px;
+            z-index: 14;
+        }
+
+        @media (width > 1400px) {
+            top: 200px;
+            width: 250px;
+            right: 200px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const kibo = document.getElementById('kibo')
+        const school = document.getElementById('school')
+        const a = document.getElementById('a')
+        const kiboOffsetTop = kibo.offsetTop
+        const schoolOffsetTop = school.offsetTop
+        const aOffsetTop = a.offsetTop
+
+        const archive = document.getElementById('archive')
+        
+        // Get the computed styles for the element
+        var kiboStyles = window.getComputedStyle(kibo);
+        var schoolStyles = window.getComputedStyle(school);
+        var aStyles = window.getComputedStyle(a);
+        
+        // Get the computed height of the element
+        var kiboHeight = parseFloat(kiboStyles.height);
+        var schoolHeight = parseFloat(schoolStyles.height);
+        var aHeight = parseFloat(aStyles.height);
+
+        if (window.innerWidth > 431 && window.innerWidth < 1024) {
+            const archiveHeight = schoolHeight + schoolOffsetTop + 72
+            console.log(schoolHeight)
+            console.log(archiveHeight)
+            archive.style.height = archiveHeight.toString() + 'px'
+        }
+
+        else if (window.innerWidth > 1024) {
+            document.body.style.overflow = 'hidden'
+            document.body.style.height = '100svh'
+            document.body.style.display = 'flex'
+        }
+        
+        else {
+            const archiveHeight = kiboHeight + kiboOffsetTop + 40
+            console.log(kiboHeight)
+            console.log(archiveHeight)
+            archive.style.height = archiveHeight.toString() + 'px'
+        }
+});
+</script>

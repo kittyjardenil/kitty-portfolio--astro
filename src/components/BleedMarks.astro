@@ -1,0 +1,102 @@
+---
+interface Props {
+    color: "purple" | "white";
+}
+
+const {color} = Astro.props;
+
+---
+<div class:list={["upper-left", color]}>
+    <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_143_1569)">
+            <path class={color} d="M34.3635 0V22.9091" stroke="#6A37CC" stroke-width="2"/>
+            <path class={color} d="M0 34.3636H22.9091" stroke="#6A37CC" stroke-width="2"/>
+        </g>
+        <defs>
+            <clipPath id="clip0_143_1569">
+                <rect width="35" height="35" fill="white"/>
+            </clipPath>
+        </defs>
+    </svg>
+</div>
+<div class:list={["upper-right", color]}>
+    <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_143_1572)">
+        <path class={color} d="M35 34.3636L12.0909 34.3636" stroke="#6A37CC" stroke-width="2"/>
+        <path class={color} d="M0.636475 0L0.636474 22.9091" stroke="#6A37CC" stroke-width="2"/>
+        </g>
+        <defs>
+        <clipPath id="clip0_143_1572">
+        <rect width="35" height="35" fill="white" transform="translate(35) rotate(90)"/>
+        </clipPath>
+        </defs>
+    </svg>
+</div>
+<div class:list={["lower-left", color]}>
+    <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_143_1575)">
+        <path class={color} d="M0 0.636353L22.9091 0.636352" stroke="#6A37CC" stroke-width="2"/>
+        <path class={color} d="M34.3635 35L34.3635 12.0909" stroke="#6A37CC" stroke-width="2"/>
+        </g>
+        <defs>
+        <clipPath id="clip0_143_1575">
+        <rect width="35" height="35" fill="white" transform="translate(0 35) rotate(-90)"/>
+        </clipPath>
+        </defs>
+    </svg>
+</div>
+<div class:list={["lower-right", color]}>
+    <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_143_1578)">
+        <path class={color} d="M0.636475 35L0.636473 12.0909" stroke="#6A37CC" stroke-width="2"/>
+        <path class={color} d="M35 0.636353L12.0909 0.636355" stroke="#6A37CC" stroke-width="2"/>
+        </g>
+        <defs>
+        <clipPath id="clip0_143_1578">
+        <rect width="35" height="35" fill="white" transform="translate(35 35) rotate(180)"/>
+        </clipPath>
+        </defs>
+    </svg>
+</div>
+
+<style>
+    .purple {
+        stroke: var(--purple);
+    }
+
+    .white {
+        stroke: white;
+    }
+
+    div {
+        display: none;
+
+        @media (width > 431px) {
+            display: flex;
+        }
+
+        > svg {
+            width: 35px;
+            height: 35px;
+        }
+    }
+    .upper-left,.upper-right,.lower-left,.lower-right {
+		position: fixed;
+	}
+	.upper-left {
+		top: 5px;
+		left: 5px;
+	}
+	.upper-right {
+		top: 5px;
+		right: 5px;
+	}
+	.lower-left {
+		bottom: 5px;
+		left: 5px;
+	}
+	.lower-right {
+		bottom: 5px;
+		right: 5px;
+	}
+</style>

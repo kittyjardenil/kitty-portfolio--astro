@@ -1,0 +1,39 @@
+:root {
+    --purple: #6A37CC;
+    --gray : #B1AEA8;
+    --black: #231F20;
+
+    --transition: all ease 0.3s;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+margin: 0;
+padding: 0;
+font-weight: normal;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: var(--purple) white;
+  scrollbar-highlight-color: var(--purple);
+  scrollbar-width: thin;
+}
+
+.draggable {
+  z-index: 20;
+  position: absolute;
+  cursor: grab;
+}

@@ -1,0 +1,201 @@
+---
+//styles
+import '../styles/global.css';
+import '../styles/typography.css';
+
+//components
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import EmailCTA from '../components/EmailCTA.astro';
+import Logo from '../components/Logo.astro';
+import DesktopNav from '../components/DesktopNav.astro';
+
+//sanity
+import { sanityClient } from "sanity:client";
+const bookWork = await sanityClient.fetch(`*[_type == "bookwork"][0]`);
+
+//sanity imagebuilder
+import imageUrlBuilder from '@sanity/image-url'
+const builder = imageUrlBuilder(sanityClient)
+function urlFor(source) {
+  return builder.image(source)
+}
+---
+
+<Layout backgroundColor='white' bleedMarksColor='purple' title='Book Work'>
+    <div class="left-col">
+        <Logo color='purple'/>
+        <DesktopNav activePage='book' color='purple'/>
+    </div>
+    <EmailCTA color='purple'/>
+    <main>
+        <div class="draggable smiley"><img src="/icons/smiley.svg" alt="Smiley Icon"></div>
+        <div class="draggable peace"><img src="/icons/peace.svg" alt="Peace Icon"></div>
+        <div class="draggable star"><img src="/icons/star-polygon.svg" alt="Star Icon"></div>
+        <section class="box">
+            <Nav color='purple' addClass='nav--bookwork'/>
+            <div class="copy">
+                <h1>{bookWork.title}</h1>
+                <p>{bookWork.description}</p>
+            </div>
+            { bookWork.images && <div class="gallery">
+                {bookWork.images.map((image) => (
+                    <img src={urlFor(image).url()} alt={image.alt}>
+                ))}
+            </div>}
+        </section>
+    </main>
+</Layout>
+
+<style is:global>
+    .nav--bookwork {
+        @media (width > 1024px) {
+            display: none !important;
+        }
+    }
+</style>
+
+<style>
+    .left-col {
+        display: none;
+
+        @media (width > 1024px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            height: 100%;
+            padding: 64px;
+            box-sizing: border-box;
+        }
+    }
+    .draggable{
+        position: fixed;
+    }
+    .smiley {
+        top: 75px;
+        right: 24px;
+        width: 30px;
+
+        @media ( width > 431px) {
+            right: unset;
+            top: 208px;
+            left: 69px;
+        }
+
+        @media (width > 1024px) {
+            left: 250px;
+        }
+    }
+    .peace {
+        right: 50px;
+        top: 271px;
+        width: 34px;
+
+        @media ( width > 431px) {
+            top: 117px;
+            right: 174px;
+        }
+
+        @media (width > 1024px) {
+            top: 71px;
+            right: 500px;
+        }
+    }
+    .star {
+        left: 40px;
+        top: 260px;
+
+        @media ( width > 431px) {
+            left: unset;
+            right: 94px;
+            top: 462px;
+        }
+
+        @media (width > 1024px) {
+            right: 150px;
+            top: 213px;
+        }
+    }
+    main {
+        >.box {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding: 24px;
+
+            @media (width > 431px) {
+                padding: 72px 64px;
+                gap: 64px;
+            }
+
+            @media (width > 1024px) {
+                padding: 152px 64px 64px 64px;
+                gap: 40px;
+                align-items: center;
+            }
+
+            >.copy {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                color: var(--purple);
+
+                @media (width > 431px) {
+                    text-align: center;
+                }
+
+                @media (width > 1024px) {
+                    width: 50%;
+                }
+
+                >h1 {
+                    font-size: var(--h3);
+
+                    @media (width > 431px) {
+                        font-size: var(--h2);
+                    }
+                }
+
+                >p {
+                    font-size: var(--small);
+                    line-height: 160%;
+                    
+                    @media (width > 431px) {
+                        font-size: var(--large);
+                        text-wrap: balance;
+                    }
+                    
+                    @media (width > 1024px) {
+                        font-size: var(--small);
+                        text-wrap: balance;
+                    }
+                }
+            }
+
+            >.gallery {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                @media (width > 431px) {
+                    display: block;
+                    column-count: 2;
+                    column-gap: 16px;
+                }
+
+                @media (width > 1024px) {
+                    padding: 0px 88px;
+                }
+
+                >img {
+                    @media ( width > 431px) {
+                        margin-bottom: 16px;
+                    }
+                }
+            }
+        }
+    }
+</style>
+
+

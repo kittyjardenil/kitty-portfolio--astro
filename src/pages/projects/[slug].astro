@@ -1,0 +1,215 @@
+---
+//component imports
+import Layout from "../../layouts/Layout.astro"
+import DesktopNav from "../../components/DesktopNav.astro";
+import Nav from "../../components/Nav.astro";
+import PortableText from "../../components/PortableText.astro";
+import EmailCTA from "../../components/EmailCTA.astro";
+
+//styles
+import '../../styles/global.css';
+import '../../styles/typography.css';
+
+//sanity
+import { sanityClient } from "sanity:client";
+
+export async function getStaticPaths() {
+    const projects = await sanityClient.fetch(`*[_type == "project"]`);
+
+    return projects.map(({ slug, name, body, footnotes, images }) => {
+    return {
+      params: { slug: slug.current },
+      props: { name, body, footnotes, images }
+    };
+  });
+}
+
+const {slug} = Astro.params
+const {name, body, footnotes, images} = Astro.props;
+
+//sanity imagebuilder
+import imageUrlBuilder from '@sanity/image-url'
+const builder = imageUrlBuilder(sanityClient)
+function urlFor(source) {
+  return builder.image(source)
+}
+
+color: 'purple' 
+---
+
+<Layout title={name} bleedMarksColor="purple" backgroundColor="white">
+    <EmailCTA color="purple"/>
+    <div class="star-polygon draggable">
+        <img src="/icons/star-polygon.svg" alt="Star Icon">
+    </div>
+    <section class="left-col">
+        <div class="heading">
+            <Nav color="purple"/>
+            <div class="copy">
+                <h1>{name}</h1>
+                <PortableText portableText={body}>
+            </div>
+            { footnotes && <div class="info">
+                {/*// @ts-ignore */}
+                {footnotes.map((footnote) => (
+                    <p>{footnote}</p>
+                ))}
+            </div>}
+        </div>
+        <DesktopNav color="purple" activePage="none"/>
+    </section>
+    <section class="gallery">
+        <div class="box">
+            { images && <div class="right-col">
+                {/*// @ts-ignore */}
+                {images.map((image) => (
+                    <img src={urlFor(image).url()} alt={image.alt}>
+                ))}
+            </div>}
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .star-polygon {
+        right: 24px;
+        top: 280px;
+        position: fixed;
+
+        @media (width > 431px) {
+            width: 49px;
+            right: 100px;
+            top: 450px;
+        }
+        
+        @media (width > 431px) {
+            width: 49px;
+            right: unset;
+            top: 374px;
+            left: 268px;
+        }
+    }
+
+    .left-col {
+        display: flex;
+        flex-direction: column;
+        padding: 24px;
+
+        @media (width > 431px) {
+            padding: 72px 64px;
+        }
+
+        @media (width > 1024px) {
+            justify-content: space-between;
+            width: 20%;
+            position: fixed;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 64px 0px 64px 64px;
+            
+        }
+
+        >.heading {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+
+            @media (width > 431px) {
+                gap: 64px;
+            }
+
+            @media (width > 1024px) {
+                gap: 24px;
+            }
+            
+            >.copy {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+
+                @media (width > 431px) {
+                    gap: 8px;
+                }
+
+                @media (width > 1024px) {
+                    gap: 4px;
+                }
+
+                >h1 {
+                    color: var(--purple);
+                    font-size: var(--h3);
+
+                    @media (width > 431px) {
+                        font-size: var(--h1);
+                    }
+
+                    @media (width > 1024px) {
+                        font-size: var(--h4);
+                    }
+                }
+
+                > p {
+                    color: var(--purple);
+                    font-size: var(--small);
+
+                    @media (width > 431px) {
+                        font-size: var(--large);
+                    }
+                    
+                    @media (width > 1024px) {
+                        font-size: var(--x-small);
+                    }
+                }
+            }
+
+            >.info {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                font-size: var(--x-small);
+                color: var(--gray);
+
+                @media (width > 431px) {
+                    font-size: var(--medium);
+                }
+                
+                @media (width > 1024px) {
+                    font-size: var(--x-small);
+                }
+            }
+        }
+    }
+
+    .gallery >.box {
+        @media ( width > 1024px) {
+            display: flex;
+            justify-content: end;
+        }
+        
+        >.right-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 24px;
+
+            @media (width > 431px) {
+                column-count: 2;
+                column-gap: 12px;
+                display: block;
+                padding: 72px 64px;
+
+                >img {
+                    margin-bottom: 12px;
+                }
+            }
+
+            @media (width > 1024px) {
+                padding: 64px;
+            }
+
+            @media (width > 1024px) {
+                width: 70%;
+            }
+        }
+    }
+</style>

@@ -1,0 +1,60 @@
+:root {
+    --h1: 3rem;
+    --h2: 2.5rem;
+    --h3: 1.5rem;
+    --h4: 1.25rem;
+    --h5: .875rem;
+    --h6: .75rem;
+    --xx-large: 2rem;
+    --x-large: 1.5rem;
+    --large: 1.25rem;
+    --medium: 1rem;
+    --small: .75rem;
+    --x-small: .625rem;
+}
+
+@font-face {
+    font-family: Fern-Text;
+    src: url("../../fonts/FernText-Regular.otf");
+}
+
+@font-face {
+    font-family: Jet-Brains-Mono;
+    src: url("../../fonts/JetBrainsMono-Regular.ttf");
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Fern-Text;
+}
+
+h1, h2, h3, h4 {
+    line-height: 120%;
+}
+
+.h3--body, h5, h6 {
+    line-height: 128%;
+}
+
+.h5--underline, .large--underline, .medium--underline,.small--underline,.x-small--underline,.small--uppercase--underline,.x-small--uppercase--underline {
+    text-decoration: underline;
+}
+
+.body {
+    font-family: Jet-Brains-Mono;
+}
+
+.small--uppercase,.small--uppercase--underline,.x-small--uppercase,.x-small--uppercase--underline {
+    text-transform: uppercase;
+}
+
+p,span {
+    font-family: Jet-Brains-Mono;
+}
+
+.xx-large,.x-large,.large,.large--underline,.small,.small--underline{
+    line-height: 160%;
+}
+
+.medium,.medium--underline,.small--uppercase,.small--uppercase--underline,.x-small,.x-small--underline,.x-small--uppercase,.x-small--uppercase--underline{
+    line-height: 160%;
+}

@@ -1,0 +1,222 @@
+---
+//styles
+import '../styles/global.css';
+import '../styles/typography.css';
+
+//props
+interface Props {
+    backgroundColor: "purple" | "white" | "black"
+    activePage:string
+}
+
+const {backgroundColor, activePage} = Astro.props
+
+//components
+import Logo from './Logo.astro';
+import EmailCTA from './EmailCTA.astro';
+---
+
+<div class="backdrop" id="mobileNavBackdrop"></div>
+<section data-background={backgroundColor} id="mobileNav">
+    <img src="/icons/star-polygon.svg" alt="Star Icon" class="draggable star" id="mobileNavStar">
+    <img src="/icons/smiley.svg" alt="Smiley Icon" class="draggable smiley" id="mobileNavSmiley">
+    <img src="/icons/photo--cup.webp" alt="Photo of Kitty's Desk" class="draggable photo" id="mobileNavPhoto">
+    <div class="box">
+        <div class="header">
+            <Logo color={backgroundColor === 'white' ? 'purple' : 'white'}/>
+            <div class="close-box" id="closeMobileNav">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="links">
+                <a href="/" class="link">
+                    <div class={`circle ${activePage === 'Portfolio' ? 'active' : ''}`}></div>
+                    <p>Home</p>
+                </a>
+                <a href="/book-work" class="link">
+                    <div class={`circle ${activePage === 'Book Work' ? 'active' : ''}`}></div>
+                    <p>Book Work</p>
+                </a>
+                <a href="/archive" class="link">
+                    <div class={`circle ${activePage === 'Archive' ? 'active' : ''}`}></div>
+                    <p>Archive</p>
+                </a>
+                <a href="/about" class="link">
+                    <div class={`circle ${activePage === 'About' ? 'active' : ''}`}></div>
+                    <p>About</p>
+                </a>
+                <a href="/shop" class="link">
+                    <div class={`circle ${activePage === 'Shop' ? 'active' : ''}`}></div>
+                    <p>Shop</p>
+                </a>
+                <a href="/etcetera" class="link">
+                    <div class={`circle ${activePage === 'Etcetera' ? 'active' : ''}`}></div>
+                    <p>Etcetera</p>
+                </a>
+            </div>
+            <a href="https://www.instagram.com/kittyjardenil/" target="_blank" class="insta-link small--underline">↗ @kittyjardenil</a>
+        </div>
+        <EmailCTA color={backgroundColor === 'white' ? 'purple' : 'white'} addClass='email-cta-mobileNav'/>
+    </div>
+</section>
+
+<style is:global>
+    .email-cta-mobileNav {
+        position: static !important;
+        display: block !important;
+        width: 90px;
+        align-self: end;
+        padding-right: 12px;
+    }
+</style>
+
+<style>
+    .backdrop {
+        position: absolute;
+        z-index: 97;
+        background-color: hsla(0, 0%, 0%, .5);
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: var(--transition);
+        display: none;
+    }
+    .star {
+        width: 30px;
+        bottom: 228px;
+        right: 51px;
+    }
+    .smiley {
+        width: 30px;
+        bottom: 40px;
+        left: 150px;
+    }
+    .photo {
+        width: 94px;
+        bottom: 80px;
+        left: 40px;
+    }
+    section {
+        --color: #6A37CC;
+        --backgroundColor: #6A37CC;
+        position: absolute;
+        width: 100%;
+        z-index: 98;
+        background-color: var(--backgroundColor);
+        opacity: 0;
+        transition: var(--transition);
+        transform: translateY(-600px);
+        display: none;
+
+        >.box {
+            padding: 40px 32px 48px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+
+            >.header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                
+                >.close-box{
+                    width: 20px;
+                    height: 20px;
+                    position: relative;
+            
+                    >div {
+                        height: 1.5px;
+                        position: absolute;
+                        width: 100%;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        background-color: var(--color);
+                    }
+
+                    >div:nth-child(1) {
+                        transform: rotate(45deg);
+                    }
+            
+                    >div:nth-child(2) {
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+            
+            >.menu {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+    
+                >.links {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+    
+                    >.link {
+                        display: flex;
+                        gap: 24px;
+                        align-items: center;
+    
+                        >.circle {
+                            width: 15px;
+                            height: 15px;
+                            background-color: var(--color);
+                            border-radius: 30px;
+                            opacity: 0;
+                        }
+
+                        >.active {
+                            opacity: 1;
+                        }
+    
+                        >p {
+                            font-size: var(--large);
+                            color: var(--color);
+                        }
+                    }
+                }
+
+                >.insta-link {
+                    font-family: Jet-Brains-Mono;
+                    color: var(--color);
+                    font-size: var(--small);
+                    padding-left: 40px;
+                }
+            }
+        }
+
+    }
+</style>
+
+<script>
+    //@ts-nocheck
+    const mobileNav = document.getElementById('mobileNav')
+    const backgroundColor = mobileNav.dataset.background
+    const star = document.getElementById('mobileNavStar')
+    const smiley = document.getElementById('mobileNavSmiley')
+    const photo = document.getElementById('mobileNavPhoto')
+
+    if (backgroundColor === 'white') {
+        mobileNav.style.cssText = '--color: #6A37CC; --backgroundColor: white'
+        star.src ='/icons/star-polygon.svg'
+        smiley.src = '/icons/smiley.svg'
+        photo.src = '/icons/photo--cup.webp'
+    }
+
+    else {
+        mobileNav.style.cssText = '--color: white; --backgroundColor: #6A37CC'
+        star.src ='/icons/star-polygon--white.svg'
+        smiley.src = '/icons/smiley--white.svg'
+
+        if (backgroundColor === 'purple') {
+            photo.src = '/icons/photo--cup.webp'
+        }
+
+        else {
+            photo.src = '/icons/photo--cup--b&w.webp'
+        }
+    }
+</script>
