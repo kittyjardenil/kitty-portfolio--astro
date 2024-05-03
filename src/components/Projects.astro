@@ -40,7 +40,7 @@ import Moment from 'moment';
         projects && <div class="swiper-wrapper">
             {projects.map((project) => (
                     <div class="swiper-slide">
-                        <a href={`projects/${project.slug.current}`} data-project-name={project.name} class="swiper-box">
+                        <a data-project-name={project.name} class="swiper-box">
                             <img src={urlFor(project.desktopImage).url()} alt={project.desktopImage.alt} class="swiper-image">
                             <div class="left"></div>
                             <div class="right"></div>
@@ -61,7 +61,7 @@ import Moment from 'moment';
         display: none;
         margin-bottom: 48px;
 
-        @media (width >431px) {
+        @media (width >430px) {
             display: flex;
             flex-direction: column;
             gap: 8px;
@@ -116,7 +116,7 @@ import Moment from 'moment';
     .swiper {
         display: none;
 
-        @media (width >431px) {
+        @media (width >430px) {
             display: block;
         }
 
