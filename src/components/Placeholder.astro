@@ -14,7 +14,12 @@ import Logo from './Logo.astro';
         <Logo color='white'/>
         <div class="copy">
             <h2>Designer, illustrator, and letterer <br>based in Parañaque, Philippines.</h2>
-            <span>Currently a full time designer at <a href="https://www.instagram.com/nsdesign.ph/" target="_blank" class="x-small--underline">NS Design</a> <br>but open for freelance work.</span>
+            <span>Often inspired by vintage illustrations and ephemera, she likes to position her work between the digital space and printed matter. This is evident in her use of texture, type, and color.
+            <br><br>
+            Kitty has collaborated with clients like Netflix, Krispy Kreme, Levi’s, and Uniqlo. Her work has been featured online and in print.
+            <br><br>  
+            She is currently a designer at <a href="https://www.instagram.com/nsdesign.ph/" target="_blank"class="h5--underline">NS Design</a> but is open for freelance work.
+            </span>
         </div>
         <img src="/images/kitty-jardenil--desktop.webp" alt="Kitty Jardenil">
         <div class="contact">
@@ -40,10 +45,14 @@ import Logo from './Logo.astro';
         >.box {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             gap: 32px;
             padding: 32px;
+
+            @media (width > 431px) {
+                padding: 64px;
+            }
 
             >.copy {
                 display: flex;
@@ -51,6 +60,11 @@ import Logo from './Logo.astro';
                 color: white;
                 text-align: center;
                 gap: 16px;
+
+                @media (width > 431px) {
+                    gap: 32px;
+                    width: 700px;
+                }
 
                 >h2 {
                     font-size: var(--h4);
@@ -84,7 +98,8 @@ import Logo from './Logo.astro';
             }
 
             >img {
-                width: 235px;
+                display: none;
+                width: 160px;
 
                 @media (width > 431px) {
                     width: 300px;
