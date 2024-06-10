@@ -4,14 +4,14 @@ import '../styles/global.css';
 
 //props
 interface Props {
-    color: "purple" | "white"
+    color: string
     addClass? : string
 }
 
 const {color, addClass} = Astro.props
 ---
 <a href="mailto:jardenilkitty@gmail.com" class={"cta " + addClass}>
-    <img src={"/icons/cta--" + color + ".svg"} alt="email icon">
+    <img src={"/icons/cta--" + color + ".svg"} alt="email icon" id="emailCTAImage">
 </a>
 
 <style>
@@ -30,6 +30,5 @@ const {color, addClass} = Astro.props
 			&:hover {
 				transform: translate3d(-4px, -8px, 0px) rotate(-20deg) scale(1.2);
 			}
-		}
-			
+		}		
 </style>

@@ -40,10 +40,16 @@ function urlFor(source) {
             </div>
             { bookWork.images && <div class="gallery">
                 {bookWork.images.map((image) => (
-                    <img src={urlFor(image).url()} alt={image.alt}>
+                    <img src={urlFor(image).url()} alt={image.alt} class="openModal" data-caption={image.caption}>
                 ))}
             </div>}
         </section>
+        <dialog id="modal" class="modal">
+            <div class="withCaption" id="modalDiv">
+                <img id="modalImage">
+                <p id="modalCaption"></p>
+            </div>
+        </dialog>
     </main>
 </Layout>
 
@@ -56,6 +62,41 @@ function urlFor(source) {
 </style>
 
 <style>
+    .modal {
+        border: none 0;
+        outline: none;
+        opacity: 0;
+        transition: var(--transition);
+        height: 90%;
+
+        > .withCaption {
+            height: 100%;
+            display: grid;
+            grid-template-rows: 96% auto;
+            gap: 16px;
+            align-items: center;
+
+            > img {
+                margin: auto;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            > p {
+                font-size: var(--small);
+                text-align: center;
+            }
+        }
+
+        > .withoutCaption {
+            height: 100%;
+
+            > img {
+                height: 100%;
+            }
+        }
+    }
+
     .left-col {
         display: none;
 
@@ -197,5 +238,73 @@ function urlFor(source) {
         }
     }
 </style>
+
+<script>
+    const modal = document.getElementById('modal');
+    const images = document.querySelectorAll('.openModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalImageCaption = document.getElementById('modalCaption')
+    const modalDiv = document.getElementById('modalDiv')
+
+    const handleClick = (event) => {
+
+        if (window.innerWidth >= 431) {
+            const clickedImageSrc = event.target.src;
+            const clickedImageCaption = event.target.dataset.caption;
+            //@ts-ignore
+            modalImage.src = clickedImageSrc;
+            if (clickedImageCaption != null) {
+                modalDiv.classList.remove('withoutCaption')
+                modalDiv.classList.add('withCaption')
+                modalImageCaption.innerHTML = clickedImageCaption
+            }
+
+            else {
+                modalDiv.classList.remove('withCaption')
+                modalDiv.classList.add('withoutCaption')
+                modalImageCaption.innerHTML = null
+                
+            }
+        
+            setTimeout(function() {
+                //@ts-ignore
+                modal.showModal();
+                modal.style.opacity = '1';
+            }, 50);
+        }
+
+        else {
+            return;
+        }
+    }
+
+    images.forEach((image) => {
+        image.addEventListener('click', handleClick);
+    });
+
+    modal.addEventListener('close', () => {
+            setTimeout(function() {
+                modal.style.opacity = '0';
+            }, 50);
+    })
+
+    modal.addEventListener('click', e => {
+        const dialogDimensions = modal.getBoundingClientRect()
+        if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+        ) 
+        {
+            modal.style.opacity = '0';
+            setTimeout(function() {
+                //@ts-ignore
+                modal.close();
+            }, 200);
+        }
+
+    })
+</script>
 
 

@@ -11,6 +11,7 @@ import EmailCTA from '../components/EmailCTA.astro';
 ---
 
 <Layout bleedMarksColor='white' title='About' backgroundColor='purple'>
+    <div class="pegboard draggable"><img src="/icons/photo--pegboard.webp" alt="pegboard photo"></div>
     <div class="smiley draggable"><img src="/icons/smiley--white.svg" alt="Smiley Icon"></div>
     <div class="peace draggable"><img src="/icons/peace--white.svg" alt="Peace Icon"></div>
     <div class="star draggable"><img src="/icons/star-polygon--white.svg" alt="Star Icon"></div>
@@ -29,8 +30,7 @@ import EmailCTA from '../components/EmailCTA.astro';
                 </span>
             </div>
             <picture>
-                <source media="(min-width:430px)" srcset="/images/kitty-jardenil--desktop.webp">
-                <img src="/images/kitty-jardenil--mobile.webp" alt="Kitty Jardenil">
+                <img src="/images/kitty-jardenil--desktop.webp" alt="Kitty Jardenil">
             </picture>
             <div class="info clients">
                 <h2>Selected Clients</h2>
@@ -76,6 +76,9 @@ import EmailCTA from '../components/EmailCTA.astro';
                 <a href="mailto:jardenilkitty@gmail.com" class="small--underline">↗ Email</a>
                 <a href="https://www.instagram.com/kittyjardenil/" target="_blank" class="small--underline">↗ Instagram</a>
                 <a href="https://www.twitter.com/kittyjardenil/" target="_blank" class="small--underline">↗ Twitter</a>
+                <div class="credit">
+                    <span>Website made by <a href="https://kaidostudio.pages.dev" target="_blank" class="small--underline">Kaido Studio</a></span>
+                </div>
             </div>
         </section>
     </main>
@@ -95,7 +98,7 @@ import EmailCTA from '../components/EmailCTA.astro';
     }
     .desktopNav--about {
         @media  (width > 1024px) {
-            grid-row: 5/6;
+            grid-row: 4/6;
             grid-column: 1/5;
             align-self: end;
         }
@@ -103,6 +106,23 @@ import EmailCTA from '../components/EmailCTA.astro';
 </style>
 
 <style>
+    .pegboard {
+        width: 110px;
+        right: 64px;
+        top: 400px;
+
+        @media (width > 430px) {
+            right: 200px;
+            top: 1100px;
+            width: 220px;
+        }
+
+        @media (width > 1024px) {
+            width: 110px;
+            right: 380px;
+            top: 320px;
+        }
+    }
     .smiley {
         top: 1070px;  
         right: 57px;
@@ -166,7 +186,7 @@ import EmailCTA from '../components/EmailCTA.astro';
             @media (width > 430px) {
                 display: grid;
                 grid-template-columns: repeat(12,1fr);
-                padding: 72px 64px;
+                padding: 64px;
                 gap: 0px;
             }
 
@@ -208,6 +228,7 @@ import EmailCTA from '../components/EmailCTA.astro';
                 >span {
                     font-size: var(--h5);
                     font-family: Fern-Text;
+                    text-wrap: pretty;
                     
                     @media (width >430px) {
                         font-size: var(--h3);
@@ -215,7 +236,7 @@ import EmailCTA from '../components/EmailCTA.astro';
                     }
                     
                     @media (width >1024px) {
-                        font-size: var(--h6);
+                        font-size: var(--small);
                         line-height: 128%;
                         display: inline-block;
                     }
@@ -292,6 +313,8 @@ import EmailCTA from '../components/EmailCTA.astro';
             }
 
             >picture {
+                margin-top: 40px;
+
                 @media (width >430px) {
                     grid-column: 1/12;
                     grid-row: 6;
@@ -302,6 +325,7 @@ import EmailCTA from '../components/EmailCTA.astro';
                     grid-column: 14/18;
                     grid-row: 3/6;
                     margin-top: 0px;
+                    transform: translateX(-16px);
                 }
             }
             
@@ -371,14 +395,25 @@ import EmailCTA from '../components/EmailCTA.astro';
                     }
                     
                     @media (width >430px) {
-                        font-size: var(--medium);
+                        font-size: var(--small);
                     }
 
                     @media (width >1024px) {
                         font-size: var(--small);
                     }
                 }
+
+                >.credit {
+                    margin-top: 16px;
+                    font-size: var(--x-small);
+                    color: white;
+                    
+                    >span   >a {
+                        color: white;
+                    }
+                }
             }
+
         }
     }
 </style>

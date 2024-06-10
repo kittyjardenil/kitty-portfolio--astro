@@ -17,32 +17,22 @@ import Moment from 'moment';
 <div class="swiper">
     {
         projects && <div class="swiper-wrapper">
-            {projects.map((project) => {
-                // Split category at '(' and insert <br> before it
-                const categoryParts = project.category.split('(');
-                const category = categoryParts.length > 1 ? (
-                    <>
-                        {categoryParts[0]}<br />({categoryParts.slice(1).join('(')}
-                    </>
-                ) : project.category;
-
-                return (
-                    <div class="swiper-slide">
-                        <a href={`projects/${project.slug.current}`}>
-                            <picture>
-                                <source media="(min-width:430px)" srcset="/images/sample-image-desktop-slider.webp">
-                                <img src={urlFor(project.mobileImage).url()} alt={project.mobileImage.alt}>
-                            </picture>
-                        </a>
-                        <a href={`projects/${project.slug.current}`} class="info">
-                            <p class="x-small--uppercase">{Moment(project.date).format('YYYY')}</p>
-                            <p class="x-small--uppercase--underline">{project.name}</p>
-                            <p class="x-small--uppercase">{category}</p>
-                            <p class="x-small--uppercase">{project.client}</p>
-                        </a>
+            {projects.map((project) => (
+                <div class="swiper-slide">
+                    <div class="swiper-div">
+                        <picture>
+                            <source media="(min-width:430px)" srcset="/images/sample-image-desktop-slider.webp">
+                            <img src={urlFor(project.mobileImage).url()} alt={project.mobileImage.alt}>
+                        </picture>
                     </div>
-                );
-            })}
+                    <a href={`projects/${project.slug.current}`} class="info">
+                        <p class="x-small--uppercase">{Moment(project.date).format('YYYY')}</p>
+                        <p class="x-small--uppercase--underline">{project.name}</p>
+                        <p class="x-small--uppercase">{project.category}</p>
+                        <p class="x-small--uppercase">{project.client}</p>
+                    </a>
+                </div>
+            ))}
         </div>
     }
 </div>
@@ -62,7 +52,7 @@ import Moment from 'moment';
                 flex-direction: column;
                 gap: 16px;
 
-                >a:nth-child(1) {
+                >div {
                     display: flex;
                     flex-grow: 1;
                     
@@ -136,10 +126,9 @@ import Moment from 'moment';
             loop: true,
             speed: 500,
             autoplay: {
-                delay: 6000,
-                pauseOnMouseEnter: true 
+                delay: 3000,
+                disableOnInteraction: true
             }
         });
     }
-
 </script>

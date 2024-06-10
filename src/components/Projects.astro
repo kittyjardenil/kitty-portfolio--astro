@@ -59,7 +59,7 @@ import Moment from 'moment';
     
     .projects {
         display: none;
-        margin-bottom: 48px;
+        margin-bottom: 40px;
 
         @media (width >430px) {
             display: flex;
@@ -68,7 +68,7 @@ import Moment from 'moment';
         }
 
         @media (width >1024px) {
-            gap: 6px;
+            gap: 4px;
             width: 85%;
         }
 
@@ -99,7 +99,7 @@ import Moment from 'moment';
             }
 
             >p {
-                font-size: var(--small);
+                font-size: var(--x-small);
                 transition: var(--transition);
             }
 
@@ -186,19 +186,19 @@ import Moment from 'moment';
     import { Autoplay } from 'swiper/modules'
     import 'swiper/css';
     import 'swiper/css/autoplay';
-
-    const swiper = new Swiper('.swiper', {
-        modules: [Autoplay],
-        direction: 'horizontal',
-        loop: true,
-        speed: 500,
-        autoplay: {
-            delay: 6000,
-            pauseOnMouseEnter: true
-        },
-    });
-
+    
     if (window.innerWidth > 430 && window.innerWidth < 1024) {
+        const swiper = new Swiper('.swiper', {
+            modules: [Autoplay],
+            direction: 'horizontal',
+            loop: true,
+            speed: 500,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: true
+            },
+        });
+
         swiper[1].on('slideChange', function () {
             const activeSlide = this.slides[this.activeIndex];
             const projectName = activeSlide.querySelector('.swiper-slide a').getAttribute('data-project-name');
@@ -219,7 +219,17 @@ import Moment from 'moment';
     }
 
     if (window.innerWidth > 1024) {
-        swiper[1].autoplay.stop()
+        const swiper = new Swiper('.swiper', {
+            modules: [Autoplay],
+            direction: 'horizontal',
+            loop: true,
+            speed: 500,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: true
+            }
+        });
+
         const projectLinks = document.querySelectorAll('.project')
         
         projectLinks.forEach(projectLink => {
@@ -236,14 +246,13 @@ import Moment from 'moment';
                     }
                 }
 
-                swiper[1].slideTo(slideIndex, 500);    
+                swiper[1].slideToLoop(slideIndex, 800);
             })
         });
 
         swiper[1].on('slideChange', function () {
             const activeSlide = swiper[1].slides[swiper[1].activeIndex];
             const projectName = activeSlide.querySelector('.swiper-slide a').getAttribute('data-project-name')
-            console.log(projectName)
             const nameParagraphs = document.querySelectorAll('.name');
 
             nameParagraphs.forEach((paragraph) => {
@@ -258,23 +267,24 @@ import Moment from 'moment';
                 }
             });
         })
+
+        const leftImageRects = document.getElementsByClassName('left')
+        const rightImageRects = document.getElementsByClassName('right')
+
+        for (let index = 0; index < leftImageRects.length; index++) {
+            const leftImageRect = leftImageRects[index];
+            leftImageRect.addEventListener('click', function() {
+                swiper[1].slidePrev(300)
+            })
+        }
+
+        
+        for (let index = 0; index < rightImageRects.length; index++) {
+            const rightImageRect = rightImageRects[index];
+            rightImageRect.addEventListener('click', function() {
+                swiper[1].slideNext(300)
+            })
+        }
     }
 
-    const leftImageRects = document.getElementsByClassName('left')
-    const rightImageRects = document.getElementsByClassName('right')
-
-    for (let index = 0; index < leftImageRects.length; index++) {
-        const leftImageRect = leftImageRects[index];
-        leftImageRect.addEventListener('click', function() {
-            swiper[1].slidePrev(300)
-        })
-    }
-
-    
-    for (let index = 0; index < rightImageRects.length; index++) {
-        const rightImageRect = rightImageRects[index];
-        rightImageRect.addEventListener('click', function() {
-            swiper[1].slideNext(300)
-        })
-    }
 </script>

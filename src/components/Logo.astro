@@ -43,8 +43,8 @@ const {color} = Astro.props
         @media ( width >1024px) {
             width: 231px;
 
-            &:hover {
-                transform: translate3d(4px, -4px, 0px);
+            &:hover g path {
+                fill: var(--gray);
             }
         }
 
@@ -61,9 +61,5 @@ const {color} = Astro.props
                 fill: white;
             }
         }
-    }
-
-    svg:hover > g > path {
-        /*fill: #301267;*/
     }
 </style>

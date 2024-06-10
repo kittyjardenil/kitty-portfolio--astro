@@ -85,7 +85,7 @@ import EmailCTA from './EmailCTA.astro';
     }
     .star {
         width: 30px;
-        bottom: 228px;
+        bottom: 40px;
         right: 51px;
     }
     .smiley {
@@ -109,6 +109,7 @@ import EmailCTA from './EmailCTA.astro';
         transition: var(--transition);
         transform: translateY(-600px);
         display: none;
+        height: 100svh;
 
         >.box {
             padding: 40px 32px 48px 32px;
@@ -206,17 +207,17 @@ import EmailCTA from './EmailCTA.astro';
         photo.src = '/icons/photo--cup.webp'
     }
 
-    else {
+    else if (backgroundColor === 'purple') {
         mobileNav.style.cssText = '--color: white; --backgroundColor: #6A37CC'
         star.src ='/icons/star-polygon--white.svg'
         smiley.src = '/icons/smiley--white.svg'
+        photo.src = '/icons/photo--cup.webp'
+    }
 
-        if (backgroundColor === 'purple') {
-            photo.src = '/icons/photo--cup.webp'
-        }
-
-        else {
-            photo.src = '/icons/photo--cup--b&w.webp'
-        }
+    else {
+        mobileNav.style.cssText = '--color: white; --backgroundColor: #231F20'
+        star.src ='/icons/star-polygon--b&w.svg'
+        smiley.src = '/icons/smiley--b&w.svg'
+        photo.src = '/icons/photo--cup--b&w.webp'
     }
 </script>
