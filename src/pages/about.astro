@@ -93,12 +93,12 @@ import EmailCTA from '../components/EmailCTA.astro';
         
         @media  (width > 1024px) {
             grid-column: 1/5;
-            margin-bottom: 48px;
+            margin-bottom: 32px;
         }
     }
     .desktopNav--about {
         @media  (width > 1024px) {
-            grid-row: 4/6;
+            grid-row: 3/5;
             grid-column: 1/5;
             align-self: end;
         }
@@ -155,7 +155,8 @@ import EmailCTA from '../components/EmailCTA.astro';
         @media (width > 1024px) {
             left: 705px;
             right: unset;
-            top: 700px;
+            top: unset;
+            bottom: 40px;
             width: 34px;
         }
     }
@@ -211,6 +212,7 @@ import EmailCTA from '../components/EmailCTA.astro';
                     grid-column: 1/6;
                     margin-bottom: 0px;
                     grid-row: 2/4;
+                    text-wrap: balance;
                 }
 
                 >h1 {
@@ -323,7 +325,7 @@ import EmailCTA from '../components/EmailCTA.astro';
                 
                 @media (width >1024px) {
                     grid-column: 14/18;
-                    grid-row: 3/6;
+                    grid-row: 2/4;
                     margin-top: 0px;
                     transform: translateX(-16px);
                 }
@@ -348,8 +350,8 @@ import EmailCTA from '../components/EmailCTA.astro';
                 }
                 
                 @media (width >1024px) {
-                    grid-column: 14;
-                    grid-row: 2/3;
+                    grid-column: 8;
+                    grid-row: 3/4;
                 }
             }
 
@@ -379,8 +381,8 @@ import EmailCTA from '../components/EmailCTA.astro';
 
                 @media (width >1024px) {
                     gap: 3px;
-                    grid-column: 8/11;
-                    grid-row: 5;
+                    grid-column: 14/18;
+                    grid-row: 4;
                     align-self: end;
                 }
 
@@ -410,6 +412,12 @@ import EmailCTA from '../components/EmailCTA.astro';
                     
                     >span   >a {
                         color: white;
+                        transition: var(--transition);
+
+                        &:hover {
+                            color: var(--gray);
+                            transform: translateY(-2px);
+                        }
                     }
                 }
             }
