@@ -72,6 +72,10 @@ import Moment from 'moment';
             width: 85%;
         }
 
+        >.project:first-child >.star{
+            opacity: 1;
+        }
+
         >.project {
             display: grid;
             grid-template-columns: 2fr 6fr 5fr 7fr;
@@ -222,33 +226,31 @@ import Moment from 'moment';
         const swiper = new Swiper('.swiper', {
             modules: [Autoplay],
             direction: 'horizontal',
-            loop: true,
+            loop: false,
             speed: 500,
             autoplay: {
                 delay: 3000,
                 disableOnInteraction: true
             }
-        });
-
-        const projectLinks = document.querySelectorAll('.project')
+        })
         
-        projectLinks.forEach(projectLink => {
-            projectLink.addEventListener('mouseover', function() {
-                const projectName = projectLink.getAttribute('data-project-name')
-                const swiperSlides = document.getElementsByClassName('swiper-box')
-                let slideIndex;
+        const leftImageRects = document.getElementsByClassName('left')
+        const rightImageRects = document.getElementsByClassName('right')
 
-                for (let i = 0; i < swiperSlides.length; i++) {
-                    const slideProjectName = swiperSlides[i].getAttribute('data-project-name');
-                    if (slideProjectName === projectName) {
-                        slideIndex = i;
-                        break;
-                    }
-                }
-
-                swiper[1].slideToLoop(slideIndex, 800);
+        for (let index = 0; index < leftImageRects.length; index++) {
+            const leftImageRect = leftImageRects[index];
+            leftImageRect.addEventListener('click', function() {
+                swiper[1].slidePrev(300)
             })
-        });
+        }
+
+        
+        for (let index = 0; index < rightImageRects.length; index++) {
+            const rightImageRect = rightImageRects[index];
+            rightImageRect.addEventListener('click', function() {
+                swiper[1].slideNext(300)
+            })
+        }
 
         swiper[1].on('slideChange', function () {
             const activeSlide = swiper[1].slides[swiper[1].activeIndex];
@@ -268,23 +270,31 @@ import Moment from 'moment';
             });
         })
 
-        const leftImageRects = document.getElementsByClassName('left')
-        const rightImageRects = document.getElementsByClassName('right')
-
-        for (let index = 0; index < leftImageRects.length; index++) {
-            const leftImageRect = leftImageRects[index];
-            leftImageRect.addEventListener('click', function() {
-                swiper[1].slidePrev(300)
-            })
-        }
-
+        const projectLinks = document.querySelectorAll('.project')
         
-        for (let index = 0; index < rightImageRects.length; index++) {
-            const rightImageRect = rightImageRects[index];
-            rightImageRect.addEventListener('click', function() {
-                swiper[1].slideNext(300)
+        projectLinks.forEach(projectLink => {
+            projectLink.addEventListener('mouseover', function() {
+                const projectName = projectLink.getAttribute('data-project-name')
+                const swiperSlides = document.getElementsByClassName('swiper-box')
+                let slideIndex;
+
+                for (let i = 0; i < swiperSlides.length; i++) {
+                    const slideProjectName = swiperSlides[i].getAttribute('data-project-name');
+                    if (slideProjectName === projectName) {
+                        slideIndex = i;
+                        break;
+                    }
+                }
+
+                console.log('Slide Index:' + slideIndex + 'Previous: ' + swiper[1].previousIndex + 'Active: ' + swiper[1].activeIndex)
+
+                if (slideIndex === 7 && swiper[1].activeIndex === 0 || slideIndex === 0 && swiper[1].activeIndex === 7) {
+                    swiper[1].slideToLoop(slideIndex, 2000);
+                } else {
+                    swiper[1].slideToLoop(slideIndex, 800);
+                }
             })
-        }
+        });
     }
 
 </script>
