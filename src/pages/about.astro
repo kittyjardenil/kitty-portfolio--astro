@@ -93,7 +93,8 @@ import EmailCTA from '../components/EmailCTA.astro';
         
         @media  (width > 1024px) {
             grid-column: 1/5;
-            margin-bottom: 32px;
+            margin-bottom: 8px;
+            align-items: start !important;
         }
     }
     .desktopNav--about {
@@ -195,12 +196,13 @@ import EmailCTA from '../components/EmailCTA.astro';
                 grid-template-columns: repeat(20, 1fr);
                 height: 100svh;
                 box-sizing: border-box;
+                padding: 56px 64px;
             }
 
             >.heading {
                 display: flex;
                 flex-direction: column;
-                gap: 32px;
+                gap: 24px;
                 color: white;
 
                 @media (width >430px) {
@@ -209,10 +211,14 @@ import EmailCTA from '../components/EmailCTA.astro';
                 }
                 
                 @media (width >1024px) {
-                    grid-column: 1/6;
+                    grid-column: 1/7;
                     margin-bottom: 0px;
                     grid-row: 2/4;
                     text-wrap: balance;
+                }
+                
+                @media (width >1440px) {
+                    grid-column: 1/6;
                 }
 
                 >h1 {
@@ -318,9 +324,10 @@ import EmailCTA from '../components/EmailCTA.astro';
                 margin-top: 40px;
 
                 @media (width >430px) {
-                    grid-column: 1/12;
+                    grid-column: 1/11;
                     grid-row: 6;
                     margin-top: 64px;
+                    margin-right: 24px;
                 }
                 
                 @media (width >1024px) {
@@ -340,6 +347,10 @@ import EmailCTA from '../components/EmailCTA.astro';
                 @media (width >1024px) {
                     grid-column: 8/12;
                     grid-row: 2/3;
+                }
+
+                @media (width > 1440px) {
+
                 }
             }
 
@@ -383,7 +394,7 @@ import EmailCTA from '../components/EmailCTA.astro';
                     gap: 3px;
                     grid-column: 14/18;
                     grid-row: 4;
-                    align-self: end;
+                    align-self: start;
                 }
 
                 >a{
