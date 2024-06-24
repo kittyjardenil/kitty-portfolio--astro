@@ -240,7 +240,14 @@ import Moment from 'moment';
         for (let index = 0; index < leftImageRects.length; index++) {
             const leftImageRect = leftImageRects[index];
             leftImageRect.addEventListener('click', function() {
-                swiper[1].slidePrev(300)
+                const activeIndex = swiper[1].activeIndex
+
+                if (activeIndex == 0) {
+                    swiper[1].slideTo(7, 2000)
+                }
+                else {
+                    swiper[1].slidePrev(300)
+                }
             })
         }
 
@@ -248,7 +255,14 @@ import Moment from 'moment';
         for (let index = 0; index < rightImageRects.length; index++) {
             const rightImageRect = rightImageRects[index];
             rightImageRect.addEventListener('click', function() {
-                swiper[1].slideNext(300)
+                const activeIndex = swiper[1].activeIndex
+
+                if (activeIndex == 7) {
+                    swiper[1].slideTo(0, 2000)
+                }
+                else {
+                    swiper[1].slideNext(300)
+                }
             })
         }
 
