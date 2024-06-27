@@ -5,7 +5,7 @@ import '../styles/typography.css';
 
 //sanity
 import { sanityClient } from "sanity:client";
-const projects = await sanityClient.fetch(`*[_type == "project"] | order(date desc)`);
+const projects = await sanityClient.fetch(`*[_type == "project"] | order(order asc)`);
 
 //sanity imagebuilder
 import imageUrlBuilder from '@sanity/image-url'
