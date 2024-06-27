@@ -63,7 +63,7 @@ color: 'purple'
             { images && <div class="right-col right-col--test">
                 {/*// @ts-ignore */}
                 {images.map((image) => (
-                    <img src={urlFor(image).url()} alt={image.alt} class="openModal" data-caption={image.caption}>
+                    <img src={urlFor(image).url()} alt={image.alt} class="openModal" data-caption={image.caption} data-size={image.size}>
                 ))}
             </div>}
         </div>
@@ -235,14 +235,13 @@ color: 'purple'
             padding: 24px;
 
             @media (width > 430px) {
-                column-count: 2;
-                column-gap: 12px;
-                display: block;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: auto;
+                gap: 16px;
                 padding: 72px 64px;
 
                 >img {
-                    margin-bottom: 12px;
-
                     &:hover {
                         cursor: pointer;
                     }
@@ -256,44 +255,6 @@ color: 'purple'
 
             @media (width > 1280px) {
                 width: 70%;
-            }
-        }
-
-        >.right-col--test {
-            display: grid;
-            grid-template-areas:
-                "sixth sixth" 
-                "first second"
-                "third fifth"
-                "fourth fourth";
-            gap: 16px;
-
-            >img {
-                margin-bottom: 0px;
-            }
-
-            >img:nth-child(1) {
-                grid-area: first;
-            }
-
-            >img:nth-child(2) {
-                grid-area: second;
-            }
-
-            >img:nth-child(3) {
-                grid-area: third;
-            }
-
-            >img:nth-child(4) {
-                grid-area: fourth;
-            }
-            
-            >img:nth-child(5) {
-                grid-area: fifth;
-            }
-
-            >img:nth-child(6) {
-                grid-area: sixth;
             }
         }
     }
@@ -369,11 +330,36 @@ color: 'purple'
 
     lightBox();
 
-    /*
-    const imageOrientation
-    const imageTotalCount
-    const singleTotalCount
-    const doubleTotalCount
-    const grid = document.getElementById('gallery-grid')
-    */
+    let imageSize
+    let singleCounter = 1
+    const projectImages = document.querySelectorAll('.openModal')
+    const isMobile = window.matchMedia('(min-width: 430px)')
+
+    function makeGrid() {
+        if (isMobile.matches) {
+            for (const projectImage of projectImages) {
+                //@ts-ignore
+                imageSize = projectImage.dataset.size
+                if (imageSize === 'double') {
+                    //@ts-ignore
+                    projectImage.style.gridColumn = '1/3'
+                }
+    
+                else {
+                    if (singleCounter === 1) {
+                        //@ts-ignore
+                        projectImage.style.gridColumn = '1'
+                        singleCounter = 2;
+                    }
+                    else {
+                        //@ts-ignore
+                        projectImage.style.gridColumn = '2'
+                        singleCounter = 1;
+                    }
+                }
+            }
+        }
+    }
+
+    makeGrid()
 </script>
