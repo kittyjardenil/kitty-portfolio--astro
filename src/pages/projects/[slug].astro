@@ -59,8 +59,8 @@ color: 'purple'
         <DesktopNav color="purple" activePage="none"/>
     </section>
     <section class="gallery">
-        <div class="box">
-            { images && <div class="right-col">
+        <div class="box" id="gallery-grid">
+            { images && <div class="right-col right-col--test">
                 {/*// @ts-ignore */}
                 {images.map((image) => (
                     <img src={urlFor(image).url()} alt={image.alt} class="openModal" data-caption={image.caption}>
@@ -258,6 +258,44 @@ color: 'purple'
                 width: 70%;
             }
         }
+
+        >.right-col--test {
+            display: grid;
+            grid-template-areas:
+                "sixth sixth" 
+                "first second"
+                "third fifth"
+                "fourth fourth";
+            gap: 16px;
+
+            >img {
+                margin-bottom: 0px;
+            }
+
+            >img:nth-child(1) {
+                grid-area: first;
+            }
+
+            >img:nth-child(2) {
+                grid-area: second;
+            }
+
+            >img:nth-child(3) {
+                grid-area: third;
+            }
+
+            >img:nth-child(4) {
+                grid-area: fourth;
+            }
+            
+            >img:nth-child(5) {
+                grid-area: fifth;
+            }
+
+            >img:nth-child(6) {
+                grid-area: sixth;
+            }
+        }
     }
 </style>
 
@@ -268,63 +306,74 @@ color: 'purple'
     const modalImageCaption = document.getElementById('modalCaption')
     const modalDiv = document.getElementById('modalDiv')
 
-    const handleClick = (event) => {
+    function lightBox() {
+        const handleClick = (event) => {
 
-        if (window.innerWidth >= 431) {
-            const clickedImageSrc = event.target.src;
-            const clickedImageCaption = event.target.dataset.caption;
-            //@ts-ignore
-            modalImage.src = clickedImageSrc;
-            if (clickedImageCaption != null) {
-                modalDiv.classList.remove('withoutCaption')
-                modalDiv.classList.add('withCaption')
-                modalImageCaption.innerHTML = clickedImageCaption
+            if (window.innerWidth >= 431) {
+                const clickedImageSrc = event.target.src;
+                const clickedImageCaption = event.target.dataset.caption;
+                //@ts-ignore
+                modalImage.src = clickedImageSrc;
+                if (clickedImageCaption != null) {
+                    modalDiv.classList.remove('withoutCaption')
+                    modalDiv.classList.add('withCaption')
+                    modalImageCaption.innerHTML = clickedImageCaption
+                }
+
+                else {
+                    modalDiv.classList.remove('withCaption')
+                    modalDiv.classList.add('withoutCaption')
+                    modalImageCaption.innerHTML = null
+                    
+                }
+            
+                setTimeout(function() {
+                    //@ts-ignore
+                    modal.showModal();
+                    modal.style.opacity = '1';
+                }, 50);
             }
 
             else {
-                modalDiv.classList.remove('withCaption')
-                modalDiv.classList.add('withoutCaption')
-                modalImageCaption.innerHTML = null
-                
+                return;
             }
-        
-            setTimeout(function() {
-                //@ts-ignore
-                modal.showModal();
-                modal.style.opacity = '1';
-            }, 50);
         }
 
-        else {
-            return;
-        }
+        images.forEach((image) => {
+            image.addEventListener('click', handleClick);
+        });
+
+        modal.addEventListener('close', () => {
+                setTimeout(function() {
+                    modal.style.opacity = '0';
+                }, 50);
+        })
+
+        modal.addEventListener('click', e => {
+            const dialogDimensions = modal.getBoundingClientRect()
+            if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+            ) 
+            {
+                modal.style.opacity = '0';
+                setTimeout(function() {
+                    //@ts-ignore
+                    modal.close();
+                }, 200);
+            }
+        })
     }
 
-    images.forEach((image) => {
-        image.addEventListener('click', handleClick);
-    });
+    lightBox();
 
-    modal.addEventListener('close', () => {
-            setTimeout(function() {
-                modal.style.opacity = '0';
-            }, 50);
-    })
-
-    modal.addEventListener('click', e => {
-        const dialogDimensions = modal.getBoundingClientRect()
-        if (
-        e.clientX < dialogDimensions.left ||
-        e.clientX > dialogDimensions.right ||
-        e.clientY < dialogDimensions.top ||
-        e.clientY > dialogDimensions.bottom
-        ) 
-        {
-            modal.style.opacity = '0';
-            setTimeout(function() {
-                //@ts-ignore
-                modal.close();
-            }, 200);
-        }
-
-    })
+    /*
+    const imageOrientation
+    const imageTotalCount
+    const singleTotalCount
+    const doubleTotalCount
+    const grid = document.getElementById('gallery-grid')
+    */
 </script>
