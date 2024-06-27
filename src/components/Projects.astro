@@ -187,9 +187,12 @@ import Moment from 'moment';
     //@ts-nocheck
 
     import Swiper from 'swiper';
-    import { Autoplay } from 'swiper/modules'
+    import { Autoplay, EffectFade } from 'swiper/modules'
     import 'swiper/css';
     import 'swiper/css/autoplay';
+    import 'swiper/css/effect-fade';
+
+    const swiperDesktopDuration = 400
     
     if (window.innerWidth > 430 && window.innerWidth < 1024) {
         const swiper = new Swiper('.swiper', {
@@ -224,14 +227,16 @@ import Moment from 'moment';
 
     if (window.innerWidth > 1024) {
         const swiper = new Swiper('.swiper', {
-            modules: [Autoplay],
+            modules: [Autoplay, EffectFade],
             direction: 'horizontal',
             loop: false,
             speed: 500,
             autoplay: {
                 delay: 3000,
                 disableOnInteraction: true
-            }
+            },
+            effect: 'fade',
+            crossFade: true
         })
         
         const leftImageRects = document.getElementsByClassName('left')
@@ -243,10 +248,10 @@ import Moment from 'moment';
                 const activeIndex = swiper[1].activeIndex
 
                 if (activeIndex == 0) {
-                    swiper[1].slideTo(7, 2000)
+                    swiper[1].slideTo(7, swiperDesktopDuration)
                 }
                 else {
-                    swiper[1].slidePrev(300)
+                    swiper[1].slidePrev(swiperDesktopDuration)
                 }
             })
         }
@@ -258,10 +263,10 @@ import Moment from 'moment';
                 const activeIndex = swiper[1].activeIndex
 
                 if (activeIndex == 7) {
-                    swiper[1].slideTo(0, 2000)
+                    swiper[1].slideTo(0, swiperDesktopDuration)
                 }
                 else {
-                    swiper[1].slideNext(300)
+                    swiper[1].slideNext(swiperDesktopDuration)
                 }
             })
         }
@@ -303,9 +308,9 @@ import Moment from 'moment';
                 console.log('Slide Index:' + slideIndex + 'Previous: ' + swiper[1].previousIndex + 'Active: ' + swiper[1].activeIndex)
 
                 if (slideIndex === 7 && swiper[1].activeIndex === 0 || slideIndex === 0 && swiper[1].activeIndex === 7) {
-                    swiper[1].slideToLoop(slideIndex, 2000);
+                    swiper[1].slideToLoop(slideIndex, swiperDesktopDuration);
                 } else {
-                    swiper[1].slideToLoop(slideIndex, 800);
+                    swiper[1].slideToLoop(slideIndex, swiperDesktopDuration);
                 }
             })
         });
