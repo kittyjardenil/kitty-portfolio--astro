@@ -189,19 +189,6 @@ color: 'purple'
                         font-size: var(--h4);
                     }
                 }
-
-                > p {
-                    color: var(--purple);
-                    font-size: var(--small);
-
-                    @media (width > 430px) {
-                        font-size: var(--large);
-                    }
-                    
-                    @media (width > 1024px) {
-                        font-size: var(--small);
-                    }
-                }
             }
 
             >.info {
@@ -256,6 +243,21 @@ color: 'purple'
             @media (width > 1280px) {
                 width: 70%;
             }
+        }
+    }
+</style>
+
+<style is:global>
+    .left-col > .heading >.copy > p {
+        color: var(--purple);
+        font-size: var(--small);
+
+        @media (width > 430px) {
+            font-size: var(--large);
+        }
+        
+        @media (width > 1024px) {
+            font-size: var(--small);
         }
     }
 </style>
