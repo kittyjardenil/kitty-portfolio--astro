@@ -51,14 +51,17 @@ import Moment from 'moment';
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
+                height: auto;
 
                 >div {
                     display: flex;
                     flex-grow: 1;
+                    object-fit: cover;
                     
                     >picture {
                         display: flex;
                         flex-grow: 1;
+                        object-fit: cover;
     
                         >img {
                             flex-grow: 1;
@@ -72,6 +75,7 @@ import Moment from 'moment';
                     grid-template-columns: 8fr 12fr;
                     grid-template-rows: auto auto;
                     gap: 6%;
+                    height: 48px;
 
                     @media (width > 430px) {
                         display: none;

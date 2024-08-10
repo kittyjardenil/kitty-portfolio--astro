@@ -131,11 +131,16 @@ import Moment from 'moment';
         >.swiper-wrapper {
             
             >.swiper-slide {
+                height: auto;
+
                 @media (width > 1024px) {
                     display: flex;
                 }
                 
                 >a {
+                    display: flex;
+                    height: 100%;
+
                     @media (width > 1024px) {
                         flex-shrink: 0;
                         width: 100%;
