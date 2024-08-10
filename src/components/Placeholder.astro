@@ -1,0 +1,126 @@
+---
+//styles
+import '../styles/global.css';
+import '../styles/typography.css';
+
+//components
+import BleedMarks from './BleedMarks.astro';
+import Logo from './Logo.astro';
+---
+
+<section>
+    <BleedMarks color='white'/>
+    <div class="box">
+        <Logo color='white'/>
+        <div class="copy">
+            <h2>Designer, illustrator, and letterer <br>based in Parañaque, Philippines.</h2>
+            <span>Often inspired by vintage illustrations and ephemera, she likes to position her work between the digital space and printed matter. This is evident in her use of texture, type, and color.
+            <br><br>
+            Kitty has collaborated with clients like Netflix, Krispy Kreme, Levi’s, and Uniqlo. Her work has been featured online and in print.
+            <br><br>  
+            She is currently a designer at <a href="https://www.instagram.com/nsdesign.ph/" target="_blank"class="h5--underline">NS Design</a> but is open for freelance work.
+            </span>
+        </div>
+        <img src="/images/kitty-jardenil--desktop.webp" alt="Kitty Jardenil">
+        <div class="contact">
+            <a href="mailto:jardenilkitty@gmail.com" class="small--underline">↗ Email</a>
+            <a href="https://www.instagram.com/kittyjardenil/" target="_blank" class="small--underline">↗ Instagram</a>
+            <a href="https://www.twitter.com/kittyjardenil/" target="_blank" class="small--underline">↗ Twitter</a>
+        </div>
+    </div>
+</section>
+
+<style>
+    section {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 98;
+        background-color: var(--purple);
+        display: flex;
+        justify-content: center;
+
+        >.box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 32px;
+            padding: 32px;
+
+            @media (width > 431px) {
+                padding: 64px;
+            }
+
+            >.copy {
+                display: flex;
+                flex-direction: column;
+                color: white;
+                text-align: center;
+                gap: 16px;
+
+                @media (width > 431px) {
+                    gap: 32px;
+                    width: 700px;
+                }
+
+                >h2 {
+                    font-size: var(--h4);
+
+                    @media (width > 431px) {
+                        font-size: var(--h3);
+                    }
+
+                    >br {
+                        display: none;
+
+                        @media (width > 431px) {
+                            display: block;
+                        }
+                    }
+                }
+
+                >span {
+                    font-size: var(--small);
+                    color: white;
+
+                    >a {
+                        color: white;
+                        transition: var(--transition);
+
+                        &:hover {
+                            color: var(--gray);
+                        }
+                    }
+                }
+            }
+
+            >img {
+                display: none;
+                width: 160px;
+
+                @media (width > 431px) {
+                    width: 300px;
+                }
+            }
+
+            >.contact {
+                display: flex;
+                gap: 40px;
+
+                >a{
+                    font-family: Jet-Brains-Mono;
+                    font-size: var(--small);
+                    color: white;
+                    transition: var(--transition);
+                    
+                    &:hover {
+                        transform: translate3d(4px, -4px, 0px);
+                    }
+                }
+            }
+        }
+    }
+</style>
