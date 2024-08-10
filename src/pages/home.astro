@@ -1,0 +1,181 @@
+---
+//components
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import MobileSwiper from '../components/MobileSwiper.astro';
+import Projects from '../components/Projects.astro';
+import DesktopNav from '../components/DesktopNav.astro';
+import EmailCTA from '../components/EmailCTA.astro';
+
+//styles
+import '../styles/global.css';
+import '../styles/typography.css';
+---
+
+<Layout title="Portfolio" bleedMarksColor='purple' backgroundColor='white'>
+    <EmailCTA color="purple"/>
+	<div class="smiley draggable">
+		<img src="/icons/smiley.svg" alt="smiley icon">
+	</div>
+	<div class="photo-mug draggable">
+		<img src="/icons/photo--mug.webp" alt="mug photo icon">
+	</div>
+	<main>
+		<section>
+			<div class="box">
+				<div class="left-col">
+					<div class="header">
+						<Nav color='purple'/>
+						<div class="copy">
+							<h1>Designer, illustrator, and letterer based in Parañaque, Philippines.</h1>
+							<span>Currently a full time designer at <a href="https://www.instagram.com/nsdesign.ph/" target="_blank" class="x-small--underline">NS Design</a> but open for freelance work.</span>
+						</div>
+					</div>
+					<DesktopNav color='purple' activePage='home'/>
+				</div>
+				<div class="right-col">
+					<MobileSwiper/>
+					<Projects/>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.smiley {
+		right: 24px;
+		top: 80px;
+
+		@media (width > 431px) {
+			display: none;
+		}
+
+		@media (width > 1024px) {
+			display: block;
+			right: unset;
+			left: 61px;
+			top: 285px
+		}
+	}
+	.photo-mug{
+		width: 90px;
+		right: 47px;
+		top: 226px;
+		
+		@media (width > 431px) {
+			display: none;
+		}
+
+		@media (width > 1024px) {
+			display: block;
+			right: unset;
+			left: 244px;
+			top: 331px;
+			width: 105px
+		}
+	}
+	.box {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 24px;
+		gap: 40px;
+		height: 100svh;
+		box-sizing: border-box;
+
+		@media (width > 431px) {
+			padding: 72px 64px;
+		}
+
+		@media (width > 1024px) {
+			padding: 64px;
+			flex-direction: row;
+			gap: 10%;
+		}
+
+		>.left-col {
+			@media (width > 1024px) {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				width: 20%;
+			}
+			>.header {
+				display: flex;
+				flex-direction: column;
+				gap: 24px;
+
+				@media (width>431px) {
+					gap: 40px;
+				}
+
+				@media (width>1024px) {
+					gap: 24px;
+				}
+
+				>.copy {
+					display: flex;
+					flex-direction: column;
+					gap: 8px;
+
+					@media (width>431px) {
+						gap: 24px;
+					}
+
+					@media (width>1024px) {
+						gap: 8px;
+					}
+
+					>h1 {
+						font-size: var(--h3);
+						color: var(--purple);
+						width: 254px;
+
+						@media (width>431px) {
+							font-size: var(--h2);
+							width: 100%;
+						}
+
+						@media (width>1024px) {
+							font-size: var(--h4);
+						}
+					}
+
+					>span {
+						font-size: var(--small);
+						color: var(--gray);
+
+						@media (width>431px) {
+							font-size: var(--large);
+						}
+
+						@media (width>1024px) {
+							font-size: var(--x-small);
+						}
+
+						>a {
+							color: var(--gray);
+							transition: var(--transition);
+
+							&:hover {
+								color: var(--purple);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		>.right-col {
+			flex-grow: 1;
+
+			@media (width > 1024px) {
+				width: 70%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
+		}
+	}
+</style>

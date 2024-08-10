@@ -4,14 +4,14 @@ import '../styles/global.css';
 
 //props
 interface Props {
-    color: "purple" | "white"
+    color: string
     addClass? : string
 }
 
 const {color, addClass} = Astro.props
 ---
 <a href="mailto:jardenilkitty@gmail.com" class={"cta " + addClass}>
-    <img src={"/icons/cta--" + color + ".svg"} alt="email icon">
+    <img src={"/icons/cta--" + color + ".svg"} alt="email icon" id="emailCTAImage">
 </a>
 
 <style>

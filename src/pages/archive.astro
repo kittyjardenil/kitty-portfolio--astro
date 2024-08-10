@@ -9,9 +9,9 @@ import EmailCTA from "../components/EmailCTA.astro";
 <Layout backgroundColor="black" bleedMarksColor="white" title="Archive">
     <section class="nav-box">
         <Nav color="white"/>
-        <DesktopNav activePage="archive" color="white"/>
+        <DesktopNav activePage="archive" color="white" addClass="archiveNav"/>
     </section>
-    <EmailCTA color="white"/>
+    <EmailCTA color="white--blackfill"/>
     <section class="archive" id="archive">
         <img src="/archive/rocks.webp" alt="" class="draggable rocks">
         <img src="/archive/vinyl.webp" alt="" class="draggable vinyl">
@@ -27,6 +27,14 @@ import EmailCTA from "../components/EmailCTA.astro";
         <img src="/archive/lavender.webp" alt="" class="draggable lavender">
     </section>
 </Layout>
+
+<style is:global>
+    .archiveNav {
+        >.box {
+            background-image: url('/icons/nav-background--white--blackfill.png') !important;
+        }
+    }
+</style>
 
 <style>
     .nav-box {
@@ -422,5 +430,5 @@ import EmailCTA from "../components/EmailCTA.astro";
             console.log(archiveHeight)
             archive.style.height = archiveHeight.toString() + 'px'
         }
-});
+    });
 </script>

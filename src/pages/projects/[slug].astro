@@ -16,16 +16,16 @@ import { sanityClient } from "sanity:client";
 export async function getStaticPaths() {
     const projects = await sanityClient.fetch(`*[_type == "project"]`);
 
-    return projects.map(({ slug, name, body, footnotes, images }) => {
+    return projects.map(({ slug, name, body, footnotes, images, mobileImage }) => {
     return {
       params: { slug: slug.current },
-      props: { name, body, footnotes, images }
+      props: { name, body, footnotes, images, mobileImage }
     };
   });
 }
 
 const {slug} = Astro.params
-const {name, body, footnotes, images} = Astro.props;
+const {name, body, footnotes, images, mobileImage} = Astro.props;
 
 //sanity imagebuilder
 import imageUrlBuilder from '@sanity/image-url'
@@ -59,18 +59,60 @@ color: 'purple'
         <DesktopNav color="purple" activePage="none"/>
     </section>
     <section class="gallery">
-        <div class="box">
-            { images && <div class="right-col">
+        <div class="box" id="gallery-grid">
+            { images && <div class="right-col right-col--test">
                 {/*// @ts-ignore */}
                 {images.map((image) => (
-                    <img src={urlFor(image).url()} alt={image.alt}>
+                    <img src={urlFor(image).url()} alt={image.alt} class="openModal" data-caption={image.caption} data-size={image.size}>
                 ))}
             </div>}
         </div>
     </section>
+    <dialog id="modal" class="modal">
+        <div class="withCaption" id="modalDiv">
+            {/*// @ts-ignore */}
+            <img src={urlFor(mobileImage).url()} alt={mobileImage.alt} id="modalImage">
+            <p id="modalCaption"></p>
+        </div>
+    </dialog>
 </Layout>
 
 <style>
+    .modal {
+        border: none 0;
+        outline: none;
+        opacity: 0;
+        transition: var(--transition);
+        height: 90%;
+
+        > .withCaption {
+            height: 100%;
+            display: grid;
+            grid-template-rows: 96% auto;
+            gap: 16px;
+            align-items: center;
+
+            > img {
+                margin: auto;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            > p {
+                font-size: var(--small);
+                text-align: center;
+            }
+        }
+
+        > .withoutCaption {
+            height: 100%;
+
+            > img {
+                height: 100%;
+            }
+        }
+    }
+
     .star-polygon {
         right: 24px;
         top: 280px;
@@ -157,7 +199,7 @@ color: 'purple'
                     }
                     
                     @media (width > 1024px) {
-                        font-size: var(--x-small);
+                        font-size: var(--small);
                     }
                 }
             }
@@ -193,23 +235,131 @@ color: 'purple'
             padding: 24px;
 
             @media (width > 430px) {
-                column-count: 2;
-                column-gap: 12px;
-                display: block;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: auto;
+                gap: 16px;
                 padding: 72px 64px;
 
                 >img {
-                    margin-bottom: 12px;
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
 
             @media (width > 1024px) {
                 padding: 64px;
+                width: 65%;
             }
 
-            @media (width > 1024px) {
+            @media (width > 1280px) {
                 width: 70%;
             }
         }
     }
 </style>
+
+<script>
+    const modal = document.getElementById('modal');
+    const images = document.querySelectorAll('.openModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalImageCaption = document.getElementById('modalCaption')
+    const modalDiv = document.getElementById('modalDiv')
+
+    function lightBox() {
+        const handleClick = (event) => {
+
+            if (window.innerWidth >= 431) {
+                const clickedImageSrc = event.target.src;
+                const clickedImageCaption = event.target.dataset.caption;
+                //@ts-ignore
+                modalImage.src = clickedImageSrc;
+                if (clickedImageCaption != null) {
+                    modalDiv.classList.remove('withoutCaption')
+                    modalDiv.classList.add('withCaption')
+                    modalImageCaption.innerHTML = clickedImageCaption
+                }
+
+                else {
+                    modalDiv.classList.remove('withCaption')
+                    modalDiv.classList.add('withoutCaption')
+                    modalImageCaption.innerHTML = null
+                    
+                }
+            
+                setTimeout(function() {
+                    //@ts-ignore
+                    modal.showModal();
+                    modal.style.opacity = '1';
+                }, 50);
+            }
+
+            else {
+                return;
+            }
+        }
+
+        images.forEach((image) => {
+            image.addEventListener('click', handleClick);
+        });
+
+        modal.addEventListener('close', () => {
+                setTimeout(function() {
+                    modal.style.opacity = '0';
+                }, 50);
+        })
+
+        modal.addEventListener('click', e => {
+            const dialogDimensions = modal.getBoundingClientRect()
+            if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+            ) 
+            {
+                modal.style.opacity = '0';
+                setTimeout(function() {
+                    //@ts-ignore
+                    modal.close();
+                }, 200);
+            }
+        })
+    }
+
+    lightBox();
+
+    let imageSize
+    let singleCounter = 1
+    const projectImages = document.querySelectorAll('.openModal')
+    const isMobile = window.matchMedia('(min-width: 430px)')
+
+    function makeGrid() {
+        if (isMobile.matches) {
+            for (const projectImage of projectImages) {
+                //@ts-ignore
+                imageSize = projectImage.dataset.size
+                if (imageSize === 'double') {
+                    //@ts-ignore
+                    projectImage.style.gridColumn = '1/3'
+                }
+    
+                else {
+                    if (singleCounter === 1) {
+                        //@ts-ignore
+                        projectImage.style.gridColumn = '1'
+                        singleCounter = 2;
+                    }
+                    else {
+                        //@ts-ignore
+                        projectImage.style.gridColumn = '2'
+                        singleCounter = 1;
+                    }
+                }
+            }
+        }
+    }
+
+    makeGrid()
+</script>

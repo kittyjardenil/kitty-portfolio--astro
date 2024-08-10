@@ -5,7 +5,7 @@ import '../styles/typography.css';
 
 //sanity
 import { sanityClient } from "sanity:client";
-const projects = await sanityClient.fetch(`*[_type == "project"] | order(date desc)`);
+const projects = await sanityClient.fetch(`*[_type == "project"] | order(order asc)`);
 
 //sanity imagebuilder
 import imageUrlBuilder from '@sanity/image-url'
@@ -59,7 +59,7 @@ import Moment from 'moment';
     
     .projects {
         display: none;
-        margin-bottom: 48px;
+        margin-bottom: 40px;
 
         @media (width >430px) {
             display: flex;
@@ -68,8 +68,12 @@ import Moment from 'moment';
         }
 
         @media (width >1024px) {
-            gap: 6px;
+            gap: 4px;
             width: 85%;
+        }
+
+        >.project:first-child >.star{
+            opacity: 1;
         }
 
         >.project {
@@ -99,7 +103,7 @@ import Moment from 'moment';
             }
 
             >p {
-                font-size: var(--small);
+                font-size: var(--x-small);
                 transition: var(--transition);
             }
 
@@ -183,22 +187,25 @@ import Moment from 'moment';
     //@ts-nocheck
 
     import Swiper from 'swiper';
-    import { Autoplay } from 'swiper/modules'
+    import { Autoplay, EffectFade } from 'swiper/modules'
     import 'swiper/css';
     import 'swiper/css/autoplay';
+    import 'swiper/css/effect-fade';
 
-    const swiper = new Swiper('.swiper', {
-        modules: [Autoplay],
-        direction: 'horizontal',
-        loop: true,
-        speed: 500,
-        autoplay: {
-            delay: 6000,
-            pauseOnMouseEnter: true
-        },
-    });
-
+    const swiperDesktopDuration = 400
+    
     if (window.innerWidth > 430 && window.innerWidth < 1024) {
+        const swiper = new Swiper('.swiper', {
+            modules: [Autoplay],
+            direction: 'horizontal',
+            loop: true,
+            speed: 500,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: true
+            },
+        });
+
         swiper[1].on('slideChange', function () {
             const activeSlide = this.slides[this.activeIndex];
             const projectName = activeSlide.querySelector('.swiper-slide a').getAttribute('data-project-name');
@@ -219,7 +226,69 @@ import Moment from 'moment';
     }
 
     if (window.innerWidth > 1024) {
-        swiper[1].autoplay.stop()
+        const swiper = new Swiper('.swiper', {
+            modules: [Autoplay, EffectFade],
+            direction: 'horizontal',
+            loop: false,
+            speed: 500,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: true
+            },
+            effect: 'fade',
+            crossFade: true
+        })
+        
+        const leftImageRects = document.getElementsByClassName('left')
+        const rightImageRects = document.getElementsByClassName('right')
+
+        for (let index = 0; index < leftImageRects.length; index++) {
+            const leftImageRect = leftImageRects[index];
+            leftImageRect.addEventListener('click', function() {
+                const activeIndex = swiper[1].activeIndex
+
+                if (activeIndex == 0) {
+                    swiper[1].slideTo(7, swiperDesktopDuration)
+                }
+                else {
+                    swiper[1].slidePrev(swiperDesktopDuration)
+                }
+            })
+        }
+
+        
+        for (let index = 0; index < rightImageRects.length; index++) {
+            const rightImageRect = rightImageRects[index];
+            rightImageRect.addEventListener('click', function() {
+                const activeIndex = swiper[1].activeIndex
+
+                if (activeIndex == 7) {
+                    swiper[1].slideTo(0, swiperDesktopDuration)
+                }
+                else {
+                    swiper[1].slideNext(swiperDesktopDuration)
+                }
+            })
+        }
+
+        swiper[1].on('slideChange', function () {
+            const activeSlide = swiper[1].slides[swiper[1].activeIndex];
+            const projectName = activeSlide.querySelector('.swiper-slide a').getAttribute('data-project-name')
+            const nameParagraphs = document.querySelectorAll('.name');
+
+            nameParagraphs.forEach((paragraph) => {
+                if (paragraph.textContent === projectName) {
+                    paragraph.nextElementSibling.nextElementSibling.style.color = 'var(--purple)'
+                    paragraph.previousElementSibling.style.color = 'var(--purple)'
+                    paragraph.previousElementSibling.previousElementSibling.style.opacity = '1'
+                } else {
+                    paragraph.nextElementSibling.nextElementSibling.style.color = 'var(--gray)'
+                    paragraph.previousElementSibling.style.color = 'var(--gray)'
+                    paragraph.previousElementSibling.previousElementSibling.style.opacity = '0'
+                }
+            });
+        })
+
         const projectLinks = document.querySelectorAll('.project')
         
         projectLinks.forEach(projectLink => {
@@ -236,45 +305,15 @@ import Moment from 'moment';
                     }
                 }
 
-                swiper[1].slideTo(slideIndex, 500);    
+                console.log('Slide Index:' + slideIndex + 'Previous: ' + swiper[1].previousIndex + 'Active: ' + swiper[1].activeIndex)
+
+                if (slideIndex === 7 && swiper[1].activeIndex === 0 || slideIndex === 0 && swiper[1].activeIndex === 7) {
+                    swiper[1].slideToLoop(slideIndex, swiperDesktopDuration);
+                } else {
+                    swiper[1].slideToLoop(slideIndex, swiperDesktopDuration);
+                }
             })
         });
-
-        swiper[1].on('slideChange', function () {
-            const activeSlide = swiper[1].slides[swiper[1].activeIndex];
-            const projectName = activeSlide.querySelector('.swiper-slide a').getAttribute('data-project-name')
-            console.log(projectName)
-            const nameParagraphs = document.querySelectorAll('.name');
-
-            nameParagraphs.forEach((paragraph) => {
-                if (paragraph.textContent === projectName) {
-                    paragraph.nextElementSibling.nextElementSibling.style.color = 'var(--purple)'
-                    paragraph.previousElementSibling.style.color = 'var(--purple)'
-                    paragraph.previousElementSibling.previousElementSibling.style.opacity = '1'
-                } else {
-                    paragraph.nextElementSibling.nextElementSibling.style.color = 'var(--gray)'
-                    paragraph.previousElementSibling.style.color = 'var(--gray)'
-                    paragraph.previousElementSibling.previousElementSibling.style.opacity = '0'
-                }
-            });
-        })
     }
 
-    const leftImageRects = document.getElementsByClassName('left')
-    const rightImageRects = document.getElementsByClassName('right')
-
-    for (let index = 0; index < leftImageRects.length; index++) {
-        const leftImageRect = leftImageRects[index];
-        leftImageRect.addEventListener('click', function() {
-            swiper[1].slidePrev(300)
-        })
-    }
-
-    
-    for (let index = 0; index < rightImageRects.length; index++) {
-        const rightImageRect = rightImageRects[index];
-        rightImageRect.addEventListener('click', function() {
-            swiper[1].slideNext(300)
-        })
-    }
 </script>
