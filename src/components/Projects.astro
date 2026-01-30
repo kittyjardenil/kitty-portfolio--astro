@@ -5,7 +5,7 @@ import '../styles/typography.css';
 
 //sanity
 import { sanityClient } from "sanity:client";
-const projects = await sanityClient.fetch(`*[_type == "project" && featured == true] | order(order asc)[0...8]`);
+const projects = await sanityClient.fetch(`*[_type == "project" && featured == true] | order(order desc)[0...8]`);
 
 //sanity imagebuilder
 import imageUrlBuilder from '@sanity/image-url'
@@ -72,6 +72,11 @@ import Moment from 'moment';
             width: 85%;
         }
 
+        @media (width >= 1920px) {
+            gap: 6px;
+            width: 100%;
+        }
+
         >.project:first-child >.star{
             opacity: 1;
         }
@@ -83,6 +88,10 @@ import Moment from 'moment';
 
             @media (width > 1024px) {
                 grid-template-columns: 2fr 5fr 5fr 8fr;
+            }
+
+            @media (width >= 1920px) {
+                grid-template-columns: 2fr 6fr 5fr 7fr;
             }
 
             &:hover .star {
@@ -105,6 +114,11 @@ import Moment from 'moment';
             >p {
                 font-size: var(--x-small);
                 transition: var(--transition);
+
+                @media (width >= 1920px) {
+                    font-size: 0.75rem;
+                    line-height: 140%;
+                }
             }
 
             >.date,.category {

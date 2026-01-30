@@ -7,37 +7,46 @@ import EmailCTA from "../components/EmailCTA.astro";
 ---
 
 <Layout backgroundColor="black" bleedMarksColor="white" title="Archive">
-    <section class="nav-box">
+    <section class="logo-box">
         <Nav color="white"/>
+    </section>
+    <section class="nav-box">
         <DesktopNav activePage="archive" color="white" addClass="archiveNav"/>
     </section>
     <EmailCTA color="white--blackfill"/>
     <section class="archive" id="archive">
-        <img src="/archive/rocks.webp" alt="" class="draggable rocks">
-        <img src="/archive/vinyl.webp" alt="" class="draggable vinyl">
-        <img src="/archive/bend.webp" alt="" class="draggable bend">
-        <img src="/archive/chef.webp" alt="" class="draggable chef">
-        <img src="/archive/rooster.webp" alt="" class="draggable rooster">
-        <img src="/archive/internet.webp" alt="" class="draggable internet">
-        <img src="/archive/a.webp" alt="" class="draggable a" id="a">
-        <img src="/archive/smart.webp" alt="" class="draggable smart">
-        <img src="/archive/collage.webp" alt="" class="draggable collage">
-        <img src="/archive/school.webp" alt="" class="draggable school" id="school">
-        <img src="/archive/kibo.webp" alt="" class="draggable kibo" id="kibo">
-        <img src="/archive/lavender.webp" alt="" class="draggable lavender">
+        <img src="/archive--new/Wanderfleur.webp" alt="" class="draggable wanderfleur">
+        <img src="/archive--new/Sarap_2.webp" alt="" class="draggable sarap--two">
+        <img src="/archive--new/ManananggalFiles_1.gif" alt="" class="draggable manananggal--one">
+        <img src="/archive--new/Kalinto.webp" alt="" class="draggable kalinto">
+        <img src="/archive--new/Hidden Teeth.webp" alt="" class="draggable hidden-teeth">
+        <img src="/archive--new/The Attic_1.webp" alt="" class="draggable attic--one">
+        <img src="/archive--new/Collage_Team.webp" alt="" class="draggable team">
+        <img src="/archive--new/Susanna Clarke.webp" alt="" class="draggable clarke">
+        <img src="/archive--new/Blood and Butter.webp" alt="" class="draggable blood">
+        <img src="/archive--new/Manananggal Files_3.webp" alt="" class="draggable manananggal--three">
+        <img src="/archive--new/Gusto.webp" alt="" class="draggable gusto">
+        <img src="/archive--new/EJ Espino.webp" alt="" class="draggable ej">
+        <img src="/archive--new/Salud.webp" alt="" class="draggable salud">
+        <img src="/archive--new/Collage_Out for Delivery.webp" alt="" class="draggable delivery">
+        <img src="/archive--new/Manananggal Files_2.webp" alt="" class="draggable manananggal--two">
+        <img src="/archive--new/Manahanan.webp" alt="" class="draggable manahanan">
+        <img src="/archive--new/Why Are You Here.webp" alt="" class="draggable why">
+        <img src="/archive--new/Sarap_1.webp" alt="" class="draggable sarap--one">
+        <img src="/archive--new/Dehusk.gif" alt="" class="draggable dehusk">
+        <img src="/archive--new/The Attic_2.webp" alt="" class="draggable attic--two">
+        <img src="/archive--new/Stork.webp" alt="" class="draggable stork">
+        <img src="/archive--new/The Bear.webp" alt="" class="draggable bear">
+        <img src="/archive--new/Wahunomi.webp" alt="" class="draggable wahunomi">
+        <img src="/archive--new/Collage_Derry Girl.webp" alt="" class="draggable derry">
     </section>
 </Layout>
 
-<style is:global>
-    .archiveNav {
-        >.box {
-            background-image: url('/icons/nav-background--white--blackfill.png') !important;
-        }
-    }
-</style>
-
 <style>
-    .nav-box {
+    html { scrollbar-width: none; } /* Firefox */
+    body { -ms-overflow-style: none; } /* IE and Edge */
+    body::-webkit-scrollbar, body::-webkit-scrollbar-button { display: none; } /* Chrome */
+    .logo-box {
         padding: 24px;
 
         @media ( width > 431px) {
@@ -46,389 +55,198 @@ import EmailCTA from "../components/EmailCTA.astro";
         
         @media ( width > 1024px) {
             padding: 64px;
-            height: 100svh;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: absolute;
+            position: fixed;
+            z-index: 90;
         }
+    }
+    .nav-box {
+        position: fixed;
+        bottom: 64px;
+        left: 64px;
+        z-index: 90;
     }
 
     .archive {
+        width: 100%;
         position: relative;
+        aspect-ratio: 1920/3211;
+    }
+
+    .wanderfleur {
+        width: 25%;
+        top: 2%;
+        right: 10%;
+    }
+
+    .sarap--two {
+        width: 15%;
+        top: 5%;
+        left: 42%;
+    }
+
+    .manananggal--one {
+        width: 20%;
+        top: 7.5%;
+        left: 16%;
+    }
+
+    .kalinto {
+        width: 10%;
+        top: 11.5%;
         left: 0;
+    }
+    
+    .hidden-teeth {
+        width: 10%;
+        top: 11%;
+        right: 28%;
+        z-index: 23;
+    }
+    
+    .attic--one {
+        width: 23%;
+        top: 14.5%;
         right: 0;
-        margin: 0 auto;
-        width: 320px;
-
-        @media (width >431px) {
-            width: 768px;
-        }
-
-        @media (width > 1024px) {
-            width: 1024px;
-            height: 100svh;
-            position: relative;
-            top: 0;
-            height: 690px;
-            bottom: 0;
-            margin: auto;
-        }
-
-        
-        @media (width > 1400px) {
-        }
-    }
-
-    .rocks {
-        left: 16px;
-        width: 100px;
-        top: 53px;
-        z-index: 11;
-
-        @media (width >431px) {
-            width: 102px;
-            top: 200px;
-            left: 84px;
-        }
-
-        @media (width > 1024px) {
-            top: 260px;
-            left: 24px;
-        }
-
-        @media (width > 1400px) {
-            width: 120px;
-            left: -130px;
-            top: 200px;
-        }
-    }
-
-    .vinyl {
-        right: 24px;
-        top: 22px;
-        width: 240px;
-        z-index: 10;
-
-        @media (width >431px) {
-            width: 265px;
-            top: 60px;
-            left: 180px;
-        }
-
-        @media (width > 1024px) {
-            top: 100px;
-            left: 120px;
-        }
-
-        @media (width > 1400px) {
-            left: -20px;
-            width: 300px;
-            top: 40px;
-        }
-    }
-
-    .bend {
-        top: 320px;
-        left: 40px;
-        width: 99px;
-        z-index: 12;
-
-        @media (width >431px) {
-            width: 80px;
-            top: 420px;
-            left: 180px;
-        }
-
-        @media (width > 1024px) {
-            top: 20px;
-            left: unset;
-            right: 280px;
-            z-index: 19;
-        }
-
-        @media (width > 1400px) {
-            width: 100px;
-            right: 280px;
-        }
     }
     
-    .chef {
-        top: 350px;
-        right: 32px;
-        width: 180px;
-        z-index: 13;
-
-        @media (width >431px) {
-            width: 189px;
-            top: 0px;
-            right: 250px;
-            z-index: 21;
-        }
-
-        @media (width > 1024px) {
-            top: 20px;
-            left: 280px;
-        }
-
-        @media (width > 1400px) {
-            top: -20px;
-            left: 200px;
-            width: 210px;
-        }
+    .team {
+        width: 24%;
+        top: 16.8%;
+        right: 30%;
+        z-index: 22;
     }
     
-    .rooster {
-        top: 480px;
-        left: 0;
-        right: 0;
-        width: 300px;
-        margin: 0 auto;
-        z-index: 14;
-
-        @media (width >431px) {
-            width: 279px;
-            top: 290px;
-            right: 64px;
-            margin: unset;
-            left: unset;
-        }
-
-        @media (width > 1024px) {
-            top: 280px;
-            left: 400px;
-            z-index: 13;
-        }
-
-        @media (width > 1400px) {
-            top: 350px;
-            width: 300px;
-        }
+    .clarke {
+        width: 13%;
+        top: 25%;
+        left: 15%;
     }
     
-    .internet {
-        top: 900px;
-        right: 60px;
-        width: 120px;
-        transform: rotate(12deg);
-        z-index: 16;
-
-        @media (width >431px) {
-            width: 148px;
-            top: 420px;
-            right: 325px;
-            transform: rotate(0deg);
-        }
-
-        @media (width > 1024px) {
-            top: 150px;
-            left: 330px;
-            right: unset;
-            width:130px;
-        }
-
-        @media (width > 1400px) {
-            top: 290px;
-            left: 310px;
-            width: 150px;
-        }
+    .blood {
+        width: 32%;
+        top: 27.2%;
+        left: 30%;
     }
-    
-    .a {
-        width: 210px;
-        top: 990px;
-        left: 50px;
-        z-index: 15;
 
-        @media (width >431px) {
-            width: 212px;
-            top: 560px;
-            left: 100px;
-        }
-
-        @media (width > 1024px) {
-            top: 480px;
-            left: 240px;
-            width: 190px;
-        }
-
-        @media (width > 1400px) {
-            width: 230px;
-            left: 130px;
-            top: 480px;
-        }
+    .manananggal--three {
+        width: 12%;
+        top: 27%;
+        right: 14%;
+        z-index: 22;
     }
-    
-    .smart {
-        width: 136px;
-        top: 1150px;
-        right: 24px;
-        z-index: 17;
 
-        @media (width >431px) {
-            width: 100px;
-            top: 1020px;
-            right: 200px;
-        }
-
-        @media (width > 1024px) {
-            top: 420px;
-            right: 40px;
-            z-index: 18;
-        }
-
-        @media (width > 1400px) {
-            right: -150px;
-            width: 120px;
-        }
+    .gusto {
+        width: 10%;
+        top: 38%;
+        left: 18%;
+        z-index: 24;
     }
-    
-    .collage {
-        width: 223px;
-        top: 1300px;
-        left: 37px;
-        z-index: 18;
 
-        @media (width >431px) {
-            width: 287px;
-            top: 600px;
-            left: unset;
-            right: 140px;
-        }
-
-        @media (width > 1024px) {
-            top: 488px;
-            right: 40px;
-            z-index: 17;
-        }
-
-        @media (width > 1400px) {
-            right: -80px;
-            width: 350px;
-        }
-    }
-    
-    .school {
-        width: 250px;
-        top: 1480px;
-        right: 35px;
-        z-index: 19;
-
-        @media (width >431px) {
-            width: 306px;
-            top: 830px;
-            left: 120px;
-            right: unset;
-        }
-
-        @media (width > 1024px) {
-            top: 100px;
-            left: unset;
-            right: 24px;
-            z-index: 12;
-        }
-
-        @media (width > 1400px) {
-            width: 350px;
-            right: -100px;
-            top: 70px;
-        }
-    }
-    
-    .kibo {
-        width: 130px;
-        top: 1750px;
-        left: 40px;
+    .ej {
+        width: 28%;
+        top: 39.7%;
+        right: 8.5%;
         z-index: 21;
-
-        @media (width >431px) {
-            width: 164px;
-            top: 16px;
-            left: unset;
-            right: 72px;
-            z-index: 13;
-        }
-
-        @media (width > 1024px) {
-            top: 0px;
-            left: 480px;
-            z-index: 20;
-        }
-
-        @media (width > 1400px) {
-            width: 180px;
-            left: 440px;
-        }
     }
-    
-    .lavender {
-        width: 175px;
-        top: 1770px;
-        right: 20px;
-        z-index: 20;
 
-        @media (width >431px) {
-            width: 247px;
-            top: 790px;
-            right: 100px;
-        }
+    .salud {
+        width: 15%;
+        top: 43.5%;
+        left: 6%;
+        z-index: 23;
+    }
 
-        @media (width > 1024px) {
-            width: 200px;
-            top: 284px;
-            left: unset;
-            right: 250px;
-            z-index: 14;
-        }
+    .delivery {
+        width: 30%;
+        top: 47.6%;
+        left: 18.3%;
+        z-index: 22;
+    }
 
-        @media (width > 1400px) {
-            top: 200px;
-            width: 250px;
-            right: 200px;
-        }
+    .manananggal--two {
+        width: 22%;
+        top: 48.5%;
+        right: 18%;
+    }
+
+    .manahanan {
+        width: 18%;
+        top: 57.3%;
+        left: 4%;
+        z-index: 21;
+    }
+
+    .why {
+        width: 15%;
+        top: 60%;
+        right: 6%;
+    }
+
+    .sarap--one {
+        width: 20%;
+        top: 64%;
+        right: 34%;
+        z-index: 19;
+    }
+
+    .dehusk {
+        width: 15%;
+        top: 72%;
+        right: 23%;
+    }
+
+    .attic--two {
+        width: 28%;
+        top: 73%;
+        left: 12%;
+    }
+
+    .stork {
+        width: 19%;
+        top: 78%;
+        right: 6%;
+        z-index: 19;
+    }
+
+    .bear {
+        width: 30%;
+        top: 83.5%;
+        left: 30%;
+        z-index: 21;
+    }
+
+    .wahunomi {
+        width: 13%;
+        top: 85.8%;
+        left: 8%;
+    }
+
+    .derry {
+        width: 12%;
+        top: 92%;
+        right: 24%;
     }
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const kibo = document.getElementById('kibo')
-        const school = document.getElementById('school')
-        const a = document.getElementById('a')
-        const kiboOffsetTop = kibo.offsetTop
-        const schoolOffsetTop = school.offsetTop
-        const aOffsetTop = a.offsetTop
+//@ts-nocheck
+    function putDraggableOnTop() {
+        const draggables = document.querySelectorAll('.draggable');
+        let lastDraggable = null;
+        draggables.forEach(draggable => {
+            draggable.addEventListener('mousedown', () => {
+                draggable.style.zIndex = '30'
+                if (lastDraggable !== draggable) {
+                    if (lastDraggable) {
+                        lastDraggable.style.zIndex = '20'
+                    }
+                    lastDraggable = draggable;
+                }
+            });
+        });
+    }     
 
-        const archive = document.getElementById('archive')
-        
-        // Get the computed styles for the element
-        var kiboStyles = window.getComputedStyle(kibo);
-        var schoolStyles = window.getComputedStyle(school);
-        var aStyles = window.getComputedStyle(a);
-        
-        // Get the computed height of the element
-        var kiboHeight = parseFloat(kiboStyles.height);
-        var schoolHeight = parseFloat(schoolStyles.height);
-        var aHeight = parseFloat(aStyles.height);
-
-        if (window.innerWidth > 431 && window.innerWidth < 1024) {
-            const archiveHeight = schoolHeight + schoolOffsetTop + 72
-            console.log(schoolHeight)
-            console.log(archiveHeight)
-            archive.style.height = archiveHeight.toString() + 'px'
-        }
-
-        else if (window.innerWidth > 1024) {
-            document.body.style.overflow = 'hidden'
-            document.body.style.height = '100svh'
-            document.body.style.display = 'flex'
-        }
-        
-        else {
-            const archiveHeight = kiboHeight + kiboOffsetTop + 40
-            console.log(kiboHeight)
-            console.log(archiveHeight)
-            archive.style.height = archiveHeight.toString() + 'px'
-        }
+    window.addEventListener('load', () => {
+        putDraggableOnTop();
     });
 </script>

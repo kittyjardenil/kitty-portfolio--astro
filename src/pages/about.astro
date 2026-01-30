@@ -33,53 +33,48 @@ import EmailCTA from '../components/EmailCTA.astro';
                 <picture>
                     <img src="/images/Kitty Jardenil-min.JPG" alt="Kitty Jardenil">
                 </picture>
-            </div>
-            <div class="info clients">
-                <h2>Selected Clients</h2>
-                <div class="columns">
-                    <div class="column">
-                        <p>Netflix</p>
-                        <p>UNIQLO</p>
-                        <p>Levi's</p>
-                        <p>Krispy Kreme</p>
-                        <p>CNN Life</p>
-                        <p>SM Woman</p>
-                        <p>Tatler Philippines</p>
-                        <p>Ayala Malls Pasyal</p>
-                        <p>Power Mac Center</p>
-                    </div>
-                    <div class="column">
-                        <p>ABS-CBN Books</p>
-                        <p>Woomera Wines</p>
-                        <p>Crosta Pizzeria</p>
-                        <p>Young STAR</p>
-                        <p>Adarna House</p>
+                <div class="contact desktop">
+                    <a href="mailto:jardenilkitty@gmail.com" class="small--underline">↗ Email</a>
+                    <a href="https://www.instagram.com/kittyjardenil/" target="_blank" class="small--underline">↗ Instagram</a>
+                    <a href="https://www.twitter.com/kittyjardenil/" target="_blank" class="small--underline">↗ Twitter</a>
+                    <div class="credit">
+                        <span>Website made by <a href="https://kaidostudio.pages.dev" target="_blank" class="small--underline">Gian Caedo</a></span>
                     </div>
                 </div>
             </div>
-            <div class="info features">
-                <h2>Features</h2>
-                <div class="column">
-                    <p>Young Star</p>
-                    <p>Candy Magazine</p>
-                    <p>Girls Club Asia</p>
-                    <p>Manila Bulletin</p>
+            <div class="info">
+                <div class="info__item">
+                    <h2>Selected Clients</h2>
+                    <div class="columns">
+                        <div class="column">
+                            <p>Netflix, UNIQLO, Levi’s Krispy Kreme, CNN Life, SM Woman, Tatler Philippines, Ayala Malls Pasyal, Power Mac Center, ABS-CBN Books, Woomera Wines, Crosta Pizzeria, Young STAR, Adarna House</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info__item">
+                    <h2>Features</h2>
+                    <div class="column">
+                        <a target="_blank" href="https://www.philstar.com/lifestyle/young-star/2020/05/01/2010884/art-isolation">↗ Art in Isolation”, Young Star, 2020</a>
+                        <a target="_blank" href="https://www.facebook.com/CandyMag/photos/for-our-new-cover-photo-we-asked-student-artist-kitty-jardenil-to-come-up-with-a/10157964821188130/">↗ Candy Magazine Cover Photo”, Candy Magazine, 2019</a>
+                        <a target="_blank" href="https://girlsclub.asia/meet-the-artist/kitty-jardenil/">↗ “Kitty Jardenil”, Girlsclub Asia 2019</a>
+                        <a target="_blank" href="https://www.pressreader.com/philippines/manila-bulletin/20200703/282114933853699">↗ “How They Say Salamat”, Manila Bulletin, 2020</a>            
+                    </div>
+                </div>
+                <div class="info__item">
+                    <h2>Dream Projects</h2>
+                    <div class="column">
+                        <p>Book Covers</p>
+                        <p>Album Covers</p>
+                        <p>Merchandise for pop culture</p>
+                    </div>
                 </div>
             </div>
-            <div class="info dream">
-                <h2>Dream Projects</h2>
-                <div class="column">
-                    <p>Book Covers</p>
-                    <p>Album Covers</p>
-                    <p>Merchandise for pop culture</p>
-                </div>
-            </div>
-            <div class="contact">
+            <div class="contact mobile">
                 <a href="mailto:jardenilkitty@gmail.com" class="small--underline">↗ Email</a>
                 <a href="https://www.instagram.com/kittyjardenil/" target="_blank" class="small--underline">↗ Instagram</a>
                 <a href="https://www.twitter.com/kittyjardenil/" target="_blank" class="small--underline">↗ Twitter</a>
                 <div class="credit">
-                    <span>Website made by <a href="https://kaidostudio.pages.dev" target="_blank" class="small--underline">Kaido Studio</a></span>
+                    <span>Website made by <a href="https://kaidostudio.pages.dev" target="_blank" class="small--underline">Gian Caedo</a></span>
                 </div>
             </div>
         </section>
@@ -143,6 +138,11 @@ import EmailCTA from '../components/EmailCTA.astro';
             top: 495px;
             width: 31px;
         }
+        
+        @media (width > 1920px) {
+            left: 425px;
+            top: 587px;
+        }
     }
     .peace {
         top: 1209px;  
@@ -161,6 +161,11 @@ import EmailCTA from '../components/EmailCTA.astro';
             top: unset;
             bottom: 40px;
             width: 34px;
+        }
+        
+        @media (width > 1920px) {
+            left: 601px;
+            top: 793px;
         }
     }
     .star {
@@ -222,6 +227,10 @@ import EmailCTA from '../components/EmailCTA.astro';
                 @media (width >1440px) {
                     grid-column: 1/6;
                 }
+                
+                @media (width >1920px) {
+                    margin-top: 20px;
+                }
 
                 >h1 {
                     font-size: var(--h3);
@@ -232,6 +241,12 @@ import EmailCTA from '../components/EmailCTA.astro';
                     
                     @media (width >1024px) {
                         font-size: var(--h4);
+                    }
+
+                    @media (width >=1920px) {
+                        font-size: 2.0625rem;
+                        line-height: 110%;
+                        max-width: 439px;
                     }
                 }
 
@@ -250,6 +265,12 @@ import EmailCTA from '../components/EmailCTA.astro';
                         line-height: 128%;
                         display: inline-block;
                     }
+                    
+                    @media (width >= 1920px) {
+                        font-size: 0.875rem;
+                        line-height: 140%;
+                        max-width: 439px;
+                    }
 
                     >a {
                         color: white;
@@ -266,60 +287,118 @@ import EmailCTA from '../components/EmailCTA.astro';
             >.info {
                 display: flex;
                 flex-direction: column;
-                gap: 8px;
+                gap: 48px;
                 color: white;
-
-                >h2 {
-                    font-size: var(--medium);
-                    font-family: Jet-Brains-Mono;
-
-                    @media (width >430px) {
-                        font-size: var(--x-large);
-                    }
-
-                    @media (width >1024px) {
-                        font-size: var(--medium);
-                    }
+                margin-top: 40px;
+                
+                @media (width >430px) {
+                    margin-top: 0px;
+                    grid-column: 1/6;
+                    grid-row: 3/5;
+                }
+                
+                @media (width >1024px) {
+                    grid-column: 8/12;
+                    grid-row: 2/3;
+                    gap: 68px;
                 }
 
-                >.columns{
-                    font-size: var(--small);
-                    display: grid;
-                    grid-template-columns: 5fr 4fr;
-                    gap: 10%;
-                    
-                    @media (width >430px) {
-                        font-size: var(--medium);
-                    }
-                    
-                    @media (width >1024px) {
-                        font-size: var(--x-small);
-                        display: flex;
-                        flex-direction: row;
-                        gap: 32px;
-                    }
+                >.info__item {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
 
+                    >h2 {
+                        font-size: var(--medium);
+                        font-family: Jet-Brains-Mono;
+    
+                        @media (width >430px) {
+                            font-size: var(--x-large);
+                        }
+    
+                        @media (width >1024px) {
+                            font-size: var(--medium);
+                        }
+    
+                        @media (width >= 1920px) {
+                            font-size: 1rem;
+                        }
+                    }
+    
+                    >.columns{
+                        font-size: var(--small);
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10%;
+                        
+                        @media (width >430px) {
+                            font-size: var(--medium);
+                        }
+                        
+                        @media (width >1024px) {
+                            font-size: var(--x-small);
+                            gap: 32px;
+                        }
+    
+                        @media (width >= 1920px) {
+                            font-size: 0.75rem;
+                            line-height: 140%;
+                            letter-spacing: 0.5px;
+                            max-width: 358px;
+                        }
+    
+                        >.column {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 2px;
+                        }
+                    }
+    
                     >.column {
+                        font-size: var(--small);
                         display: flex;
                         flex-direction: column;
                         gap: 2px;
+    
+                        @media (width >430px) {
+                            font-size: var(--medium);
+                        }
+                        
+                        @media (width >1024px) {
+                            font-size: var(--x-small);
+                            line-height: 140%;
+                            letter-spacing: 0.5px;
+                            gap: 6px;
+                        }
+                        
+                        @media (width >= 1920px) {
+                            font-size: 0.75rem;
+                            gap: 6px;
+                        }
+    
+                        > a {
+                            font-family: Jet-Brains-Mono;
+                            color: white;
+                            font-size: var(--small);
+                            text-decoration: underline;
+                            font-style: italic;
+    
+                            @media (width >430px) {
+                                font-size: var(--medium);
+                            }
+                        
+                            @media (width >1024px) {
+                                font-size: var(--x-small);
+                            }
+    
+                            @media (width >= 1920px) {
+                                font-size: 0.75rem;
+                                line-height: 140%;
+                            }
+                        }
                     }
                 }
 
-                >.column {
-                    font-size: var(--small);
-                    display: flex;
-                    flex-direction: column;
-                    gap: 2px;
-
-                    @media (width >430px) {
-                        font-size: var(--medium);
-                    }
-                    
-                    @media (width >1024px) {
-                        font-size: var(--x-small);
-                    }
-                }
             }
 
             >.photo {
@@ -330,112 +409,95 @@ import EmailCTA from '../components/EmailCTA.astro';
                     grid-column: 1/11;
                     grid-row: 6;
                     margin-top: 64px;
-                    margin-right: 24px;
                 }
                 
                 @media (width >1024px) {
                     grid-column: 14/18;
                     grid-row: 2/4;
                     margin-top: 0px;
-                    transform: translateX(-16px);
                 }
+            }
+        }
+    }
+    .contact {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        
+        @media (width >430px) {
+            gap: 8px;
+            grid-column: 11/13;
+            grid-row: 6;
+            align-self: end;
+        }
+
+        @media (width >1024px) {
+            gap: 3px;
+            grid-column: 14/18;
+            grid-row: 4;
+            align-self: start;
+        }
+
+        >a{
+            font-family: Jet-Brains-Mono;
+            font-size: var(--small);
+            color: white;
+            transition: var(--transition);
+            
+            &:hover {
+                transform: translate3d(4px, -4px, 0px);
             }
             
-            >.clients {
-                @media (width >430px) {
-                    grid-column: 1/6;
-                    grid-row: 3/5;
-                }
-                
-                @media (width >1024px) {
-                    grid-column: 8/12;
-                    grid-row: 2/3;
-                }
+            @media (width >430px) {
+                font-size: var(--small);
+            }
 
-                @media (width > 1440px) {
+            @media (width >1024px) {
+                font-size: var(--small);
+            }
 
+            @media (width >= 1920px) {
+                font-size: 0.75rem;
+                line-height: 140%;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        >.credit {
+            margin-top: 24px;
+            font-size: var(--x-small);
+            color: white;
+            
+            >span   >a {
+                color: white;
+                transition: var(--transition);
+
+                &:hover {
+                    color: var(--gray);
+                    transform: translateY(-2px);
                 }
             }
 
-            >.features {
-                @media (width >430px) {
-                    grid-column: 7/13;
-                    grid-row: 3/4;
-                }
-                
-                @media (width >1024px) {
-                    grid-column: 8;
-                    grid-row: 3/4;
-                }
+            @media (width >= 1920px) {
+                font-size: 0.75rem;
+                line-height: 140%;
+                letter-spacing: 0.5px;
             }
+        }
 
-            >.dream {
-                @media (width >430px) {
-                    grid-column: 7/13;
-                    grid-row: 4;
-                }
-                
-                @media (width >1024px) {
-                    grid-column: 8/12;
-                    grid-row: 4;
-                }
+        &.mobile {
+            @media (width > 1024px) {
+                display: none;
             }
+        }
 
-            >.contact {
+        &.desktop {
+            display: none;
+
+            @media (width > 1024px) {
                 display: flex;
-                flex-direction: column;
-                gap: 3px;
-                
-                @media (width >430px) {
-                    gap: 8px;
-                    grid-column: 11/13;
-                    grid-row: 6;
-                    align-self: end;
-                }
-
-                @media (width >1024px) {
-                    gap: 3px;
-                    grid-column: 14/18;
-                    grid-row: 4;
-                    align-self: start;
-                }
-
-                >a{
-                    font-family: Jet-Brains-Mono;
-                    font-size: var(--small);
-                    color: white;
-                    transition: var(--transition);
-                    
-                    &:hover {
-                        transform: translate3d(4px, -4px, 0px);
-                    }
-                    
-                    @media (width >430px) {
-                        font-size: var(--small);
-                    }
-
-                    @media (width >1024px) {
-                        font-size: var(--small);
-                    }
-                }
-
-                >.credit {
-                    margin-top: 16px;
-                    font-size: var(--x-small);
-                    color: white;
-                    
-                    >span   >a {
-                        color: white;
-                        transition: var(--transition);
-
-                        &:hover {
-                            color: var(--gray);
-                            transform: translateY(-2px);
-                        }
-                    }
-                }
+                margin-top: 40px;
             }
-
         }
     }
 </style>

@@ -39,8 +39,14 @@ color: 'purple'
 
 <Layout title={name} bleedMarksColor="purple" backgroundColor="white">
     <EmailCTA color="purple"/>
-    <div class="star-polygon draggable">
+    <div class="sticker draggable">
         <img src="/icons/star-polygon.svg" alt="Star Icon">
+    </div>
+    <div class="sticker draggable">
+        <img src="/icons/peace.svg" alt="Peace hand sign Icon">
+    </div>
+    <div class="sticker draggable">
+        <img src="/icons/smiley.svg" alt="Smiley Icon">
     </div>
     <section class="left-col">
         <div class="heading">
@@ -132,6 +138,11 @@ color: 'purple'
         }
     }
 
+    .sticker {
+        position: fixed;
+        width: 35px;
+    }
+
     .left-col {
         display: flex;
         flex-direction: column;
@@ -188,6 +199,13 @@ color: 'purple'
                     @media (width > 1024px) {
                         font-size: var(--h4);
                     }
+
+                    @media (width >=1920px) {
+                        font-size: 2.0625rem;
+                        line-height: 110%;
+                        max-width: 352px;
+                        margin-bottom: 8px;
+                    }
                 }
             }
 
@@ -204,6 +222,11 @@ color: 'purple'
                 
                 @media (width > 1024px) {
                     font-size: var(--x-small);
+                }
+
+                @media (width >= 1920px) {
+                    font-size: 0.75rem;
+                    gap: 8px;
                 }
             }
         }
@@ -258,6 +281,12 @@ color: 'purple'
         
         @media (width > 1024px) {
             font-size: var(--small);
+        }
+
+        @media (width >= 1920px) {
+            font-size: 0.875rem;
+            line-height: 140%;
+            max-width: 352px;
         }
 
         a {
@@ -369,4 +398,16 @@ color: 'purple'
     }
 
     makeGrid()
+
+    function randomizeStickerPlacement() {
+        const stickers = document.querySelectorAll('.draggable')
+        stickers.forEach(sticker => {
+            //@ts-ignore
+            sticker.style.top = Math.random() * 80 + '%'
+            
+            //@ts-ignore
+            sticker.style.left = Math.random() * 80 + '%'
+        })
+    }
+    randomizeStickerPlacement()
 </script>

@@ -23,6 +23,11 @@
     src: url("../../fonts/JetBrainsMono-Regular.ttf");
 }
 
+@font-face {
+    font-family: Jet-Brains-Mono-Italic;
+    src: url("../../fonts/JetBrainsMono-Italic.ttf");
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: Fern-Text;
 }

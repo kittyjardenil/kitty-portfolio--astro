@@ -1,7 +1,7 @@
 ---
 //sanity
 import { sanityClient } from "sanity:client";
-const projects = await sanityClient.fetch(`*[_type == "project" && featured == true] | order(date desc)[0...8]`);
+const projects = await sanityClient.fetch(`*[_type == "project" && featured == true] | order(order desc)[0...8]`);
 
 //sanity imagebuilder
 import imageUrlBuilder from '@sanity/image-url'
