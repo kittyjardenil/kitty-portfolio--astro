@@ -40,7 +40,7 @@ function urlFor(source) {
             </div>
             { bookWork.images && <div class="gallery">
                 {bookWork.images.map((image) => (
-                    <img src={urlFor(image).url()} alt={image.alt} class="openModal" data-caption={image.caption}>
+                    <img src={urlFor(image).url()} alt={image.alt} class="openModal gallery__image" data-caption={image.caption} data-size={image.size}/>
                 ))}
             </div>}
         </section>
@@ -221,10 +221,16 @@ function urlFor(source) {
                 flex-direction: column;
                 gap: 8px;
 
-                @media (width > 430px) {
+                @media (width > 431px) {
                     display: block;
                     column-count: 2;
                     column-gap: 16px;
+                }
+
+                @media (width > 767px) {
+                    display: grid;
+                    grid-template-columns: repeat(2,1fr);
+                    gap: 16px;
                 }
 
                 @media (width > 1024px) {
@@ -238,6 +244,9 @@ function urlFor(source) {
                 }
             }
         }
+    }
+    .gallery__image {
+        
     }
 </style>
 
@@ -307,6 +316,24 @@ function urlFor(source) {
         }
 
     })
+</script>
+
+<script>
+    //@ts-nocheck
+
+    function makeGrid() {
+        const images = document.querySelectorAll('.gallery__image')
+        const isMobile = window.matchMedia('(min-width: 430px)')
+
+        images.forEach(image => {
+            const size = image.dataset.size
+            if (size === 'double') {
+                image.style.gridColumn = 'span 2'
+            }
+        })
+    }
+
+    window.addEventListener('load', makeGrid)
 </script>
 
 
