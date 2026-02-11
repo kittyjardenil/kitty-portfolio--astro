@@ -235,12 +235,13 @@ import EmailCTA from "../components/EmailCTA.astro";
         let lastDraggable = null;
         draggables.forEach(draggable => {
             draggable.addEventListener('mousedown', () => {
-                draggable.style.zIndex = '30'
-                if (lastDraggable !== draggable) {
-                    if (lastDraggable) {
-                        lastDraggable.style.zIndex = '20'
-                    }
-                    lastDraggable = draggable;
+                if (lastDraggable === null) {
+                    lastDraggable = 30
+                    draggable.style.zIndex = lastDraggable
+                }
+                else {
+                    draggable.style.zIndex = lastDraggable + 1;
+                    lastDraggable++
                 }
             });
         });

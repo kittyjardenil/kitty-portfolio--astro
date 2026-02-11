@@ -39,13 +39,13 @@ color: 'purple'
 
 <Layout title={name} bleedMarksColor="purple" backgroundColor="white">
     <EmailCTA color="purple"/>
-    <div class="sticker draggable">
+    <div class="sticker draggable star">
         <img src="/icons/star-polygon.svg" alt="Star Icon">
     </div>
-    <div class="sticker draggable">
+    <div class="sticker draggable peace">
         <img src="/icons/peace.svg" alt="Peace hand sign Icon">
     </div>
-    <div class="sticker draggable">
+    <div class="sticker draggable smiley">
         <img src="/icons/smiley.svg" alt="Smiley Icon">
     </div>
     <section class="left-col">
@@ -151,22 +151,90 @@ color: 'purple'
         }
     }
 
-    .star-polygon {
-        right: 24px;
-        top: 280px;
+    .star {
+        right: 30px;
+        bottom: 40%;
         position: fixed;
 
-        @media (width > 430px) {
+        @media (width > 1024px) {
             width: 49px;
-            right: 100px;
-            top: 450px;
-        }
-        
-        @media (width > 430px) {
-            width: 49px;
+            left: 22%;
+            top: 15%;
+            bottom: unset;
             right: unset;
-            top: 374px;
-            left: 268px;
+        }
+    }
+
+    .star.second {
+        @media (width > 1024px) {
+            left: unset;
+            right: 12%;
+            top: 20%;
+        }
+    }
+
+    .star.third {
+        @media (width > 1024px) {
+            left: unset;
+            right: 12%;
+            top: unset;
+            bottom: 20%;
+        }
+    }
+
+    .smiley {
+        bottom: 20%;
+        left: 10%;
+
+        @media (width > 1024px) {
+            left: 22%;
+            bottom: 35%;
+        }
+    }
+
+    .smiley.second {
+        @media (width > 1024px) {
+            bottom: 20%;
+            left: 25%;
+            right: unset;
+            top: unset;
+        }
+    }
+
+    .smiley.third {
+        @media (width > 1024px) {
+            bottom: unset;
+            left: 35%;
+            right: unset;
+            top: 20%;
+        }
+    }
+
+    .peace {
+        bottom: 10%;
+        left: 50%;
+
+        @media (width > 1024px) {
+            left: 15%;
+            bottom: 40%;
+        }
+    }
+
+    .peace.second {
+        @media (width > 1024px) {
+            bottom: 38%;
+            left: 18%;
+            right: unset;
+            top: unset;
+        }
+    }
+
+    .peace.third {
+        @media (width > 1280px) {
+            bottom: 25%;
+            left: 20%;
+            right: unset;
+            top: unset;
         }
     }
 
@@ -186,12 +254,20 @@ color: 'purple'
 
         @media (width > 1024px) {
             justify-content: space-between;
+            width: 25%;
+            position: fixed;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 64px 0px 64px 64px;
+        }
+
+        @media (width >=1280px) {
+            justify-content: space-between;
             width: 20%;
             position: fixed;
             height: 100%;
             box-sizing: border-box;
             padding: 64px 0px 64px 64px;
-            
         }
 
         >.heading {
@@ -237,6 +313,7 @@ color: 'purple'
                         line-height: 110%;
                         max-width: 352px;
                         margin-bottom: 8px;
+                        text-wrap: balance;
                     }
                 }
             }
@@ -535,7 +612,25 @@ color: 'purple'
             sticker.style.left = Math.random() * 80 + '%'
         })
     }
-    randomizeStickerPlacement()
+    //randomizeStickerPlacement()
+
+    function chooseStickerPlacement() {
+        const stickers = document.querySelectorAll('.draggable')
+        const choice = Math.floor(Math.random() * 3) + 1;
+
+        if (choice === 2) {
+            stickers.forEach(sticker => {
+                sticker.classList.add('second')
+            })
+        }
+
+        else if (choice === 3) {
+            stickers.forEach(sticker => {
+                sticker.classList.add('third')
+            })
+        }
+    }
+    chooseStickerPlacement()
 
     function initSplide() {
         const splideModal = document.querySelector('.slider');
