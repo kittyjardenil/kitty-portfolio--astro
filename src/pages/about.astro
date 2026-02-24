@@ -8,6 +8,18 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import DesktopNav from '../components/DesktopNav.astro';
 import EmailCTA from '../components/EmailCTA.astro';
+import PortableText from "../components/PortableText.astro";
+
+//sanity
+import { sanityClient } from "sanity:client";
+const about = await sanityClient.fetch(`*[_type == "about"][0]`);
+
+//sanity imagebuilder
+import imageUrlBuilder from '@sanity/image-url'
+const builder = imageUrlBuilder(sanityClient)
+function urlFor(source) {
+  return builder.image(source)
+}
 ---
 
 <Layout bleedMarksColor='white' title='About' backgroundColor='purple'>
@@ -20,63 +32,59 @@ import EmailCTA from '../components/EmailCTA.astro';
             <Nav color='white' addClass='nav--about' />
             <DesktopNav color='white' activePage='about' addClass='desktopNav--about'/>
             <div class="heading">
-                <h1>Kitty Jardenil is a designer, illustrator, and letterer from Parañaque, Philippines.</h1>
-                <span>Drawn to the tactility of print and all its vivid imagery, she continues to find her work in between the digital space and the printed matter—whether simulating texture on-screen or printing and assembling with her hands.
-                <br><br>
-                Through years of practice and endless curiosity that traverses several media, Kitty explores how design lives in both functional and expressive forms. She has collaborated with clients like Netflix, Krispy Kreme, Levi’s, and Uniqlo, with her work featured both online and in print.
-                <br><br>  
-                Alongside her freelance practice, she runs <a href="https://www.instagram.com/bestregardspress/" target="_blank"class="h5--underline">Best Regards Press</a>, an independent letterpress studio that produces ephemera, publications, and other printed matter. 
-                </span>
+                <div class="heading-box">
+                    <PortableText portableText={about.heading}>
+                </div>
+                <div class="heading__description-box">
+                    <PortableText portableText={about.description}>
+                </div>
             </div>
             <div class="photo">
                 <div class="pegboard draggable"><img src="/icons/photo--pegboard.webp" alt="pegboard photo"></div>
                 <picture>
-                    <img src="/images/Kitty Jardenil-min.JPG" alt="Kitty Jardenil">
+                    <img src={urlFor(about.image).url()} alt={about.image.alt}>
                 </picture>
-                <div class="contact desktop">
-                    <a href="mailto:jardenilkitty@gmail.com" class="small--underline">↗ Email</a>
-                    <a href="https://www.instagram.com/kittyjardenil/" target="_blank" class="small--underline">↗ Instagram</a>
-                    <a href="https://www.twitter.com/kittyjardenil/" target="_blank" class="small--underline">↗ Twitter</a>
+                { about.links && <div class="contact desktop">
+                    {about.links.map((item, index) => (
+                        <a href={item.link?.current} target={index === 0 ? undefined : "_blank"} class="small--underline">{item.text}</a>
+                    ))}
                     <div class="credit">
                         <span>Website made by <a href="https://kaidostudio.pages.dev" target="_blank" class="small--underline">Gian Caedo</a></span>
                     </div>
-                </div>
+                </div> }
             </div>
             <div class="info">
                 <div class="info__item">
                     <h2>Selected Clients</h2>
                     <div class="columns">
                         <div class="column">
-                            <p>Netflix, UNIQLO, Levi’s Krispy Kreme, CNN Life, SM Woman, Tatler Philippines, Ayala Malls Pasyal, Power Mac Center, ABS-CBN Books, Woomera Wines, Crosta Pizzeria, Young STAR, Adarna House</p>
+                            <PortableText portableText={about.clients}></PortableText>
                         </div>
                     </div>
                 </div>
                 <div class="info__item">
                     <h2>Features</h2>
-                    <div class="column">
-                        <a target="_blank" href="https://www.philstar.com/lifestyle/young-star/2020/05/01/2010884/art-isolation">↗ Art in Isolation”, Young Star, 2020</a>
-                        <a target="_blank" href="https://www.facebook.com/CandyMag/photos/for-our-new-cover-photo-we-asked-student-artist-kitty-jardenil-to-come-up-with-a/10157964821188130/">↗ Candy Magazine Cover Photo”, Candy Magazine, 2019</a>
-                        <a target="_blank" href="https://girlsclub.asia/meet-the-artist/kitty-jardenil/">↗ “Kitty Jardenil”, Girlsclub Asia 2019</a>
-                        <a target="_blank" href="https://www.pressreader.com/philippines/manila-bulletin/20200703/282114933853699">↗ “How They Say Salamat”, Manila Bulletin, 2020</a>            
-                    </div>
+                    { about.features && <div class="column">
+                        {about.features.map((item) => (
+                            <a target="_blank" href={item.link?.current}>{item.text}</a>
+                        ))}
+                    </div> }
                 </div>
                 <div class="info__item">
                     <h2>Dream Projects</h2>
                     <div class="column">
-                        <p>Book Covers</p>
-                        <p>Album Covers</p>
-                        <p>Merchandise for pop culture</p>
+                        <PortableText portableText={about.dreamProjects}></PortableText>
                     </div>
                 </div>
             </div>
-            <div class="contact mobile">
-                <a href="mailto:jardenilkitty@gmail.com" class="small--underline">↗ Email</a>
-                <a href="https://www.instagram.com/kittyjardenil/" target="_blank" class="small--underline">↗ Instagram</a>
-                <a href="https://www.twitter.com/kittyjardenil/" target="_blank" class="small--underline">↗ Twitter</a>
+            { about.links && <div class="contact mobile">
+                {about.links.map((item, index) => (
+                    <a href={item.link?.current} target={index === 0 ? undefined : "_blank"} class="small--underline">{item.text}</a>
+                ))}
                 <div class="credit">
                     <span>Website made by <a href="https://kaidostudio.pages.dev" target="_blank" class="small--underline">Gian Caedo</a></span>
                 </div>
-            </div>
+            </div> }
         </section>
     </main>
 </Layout>
@@ -249,7 +257,7 @@ import EmailCTA from '../components/EmailCTA.astro';
                     }
                 }
 
-                >span {
+                > .heading__description-box {
                     font-size: var(--h5);
                     font-family: Fern-Text;
                     text-wrap: pretty;
@@ -399,6 +407,10 @@ import EmailCTA from '../components/EmailCTA.astro';
                                 font-size: 0.75rem;
                                 line-height: 140%;
                             }
+
+                            &::before {
+                                content: '↗ ';
+                            }
                         }
                     }
                 }
@@ -465,6 +477,10 @@ import EmailCTA from '../components/EmailCTA.astro';
                 line-height: 140%;
                 letter-spacing: 0.5px;
             }
+
+            &::before {
+                content: '↗ ';
+            }
         }
 
         >.credit {
@@ -507,6 +523,42 @@ import EmailCTA from '../components/EmailCTA.astro';
             @media (width >= 1920px) {
                 display: flex;
                 margin-top: 40px;
+            }
+        }
+    }
+</style>
+
+<style is:global>
+    .heading__description-box > p {
+        font-size: var(--h5);
+        font-family: Fern-Text;
+        text-wrap: pretty;
+        
+        @media (width >430px) {
+            font-size: var(--h3);
+            line-height: 128%;
+        }
+        
+        @media (width >1024px) {
+            font-size: var(--small);
+            line-height: 128%;
+            display: inline-block;
+        }
+        
+        @media (width >= 1920px) {
+            font-size: 0.875rem;
+            line-height: 140%;
+            max-width: 439px;
+        }
+
+        >a {
+            color: white;
+            transition: var(--transition);
+            display: inline-block;
+            text-decoration: underline;
+
+            &:hover {
+                transform: translateY(-2px);
             }
         }
     }
